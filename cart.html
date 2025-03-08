@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عربة التسوق - جوريم للمواد الإنشائية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* المتغيرات وإعدادات الألوان */
+      :root {
+        --primary: #203e5f;
+        --primary-light: #315780;
+        --primary-dark: #132845;
+        --secondary: #00547a;
+        --accent: #d4af37;
+        --accent-light: #f4e9c9;
+        --white: #ffffff;
+        --light-gray: #f0f4f8;
+        --dark-gray: #4a4a4a;
+        --transition: all 0.4s ease;
+      }
+
+      /* إعدادات عامة */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        color: var(--dark-gray);
+        overflow-x: hidden;
+        background-color: var(--light-gray);
+      }
+
+      /* شريط التنقل */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        background-color: var(--white);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+      }
+
+      .nav-links a {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        right: 0;
+        background-color: var(--accent);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .cart-button {
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 5px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .cart-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--primary);
+        cursor: pointer;
+      }
+
+      /* رأس صفحة العربة */
+      .page-header {
+        padding: 8rem 0 3rem;
+        text-align: center;
+        background-color: var(--white);
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .breadcrumb {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .breadcrumb a {
+        color: var(--dark-gray);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .breadcrumb a:hover {
+        color: var(--accent);
+      }
+
+      .breadcrumb-separator {
+        color: #999;
+      }
+
+      .breadcrumb-current {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* قسم العربة */
+      .cart-section {
+        padding: 3rem 0 5rem;
+      }
+
+      .cart-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+
+      .cart-layout {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 2rem;
+      }
+
+      /* جدول العربة */
+      .cart-table {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .cart-header {
+        display: grid;
+        grid-template-columns: 40px 2fr 1fr 1fr 1fr 40px;
+        padding: 1.2rem 1.5rem;
+        background-color: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .cart-items {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .cart-item {
+        display: grid;
+        grid-template-columns: 40px 2fr 1fr 1fr 1fr 40px;
+        padding: 1.5rem;
+        border-bottom: 1px solid #eee;
+        align-items: center;
+      }
+
+      .item-check {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      .item-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .item-image {
+        width: 80px;
+        height: 80px;
+        padding: 0.5rem;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .item-details {
+        flex-grow: 1;
+      }
+
+      .item-name {
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .item-meta {
+        font-size: 0.9rem;
+        color: #777;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .item-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .item-price {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .item-quantity {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+      }
+
+      .quantity-btn {
+        width: 32px;
+        height: 32px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .quantity-btn:hover {
+        background-color: #eee;
+      }
+
+      .quantity-input {
+        width: 45px;
+        height: 32px;
+        border: 1px solid #ddd;
+        border-right: none;
+        border-left: none;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .item-subtotal {
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .remove-item {
+        color: #999;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+      }
+
+      .remove-item:hover {
+        color: #e74c3c;
+      }
+
+      .cart-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+        background-color: #f9f9f9;
+      }
+
+      .cart-action-btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .continue-shopping {
+        background-color: transparent;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
+
+      .continue-shopping:hover {
+        background-color: var(--primary-light);
+        color: var(--white);
+        border-color: var(--primary-light);
+      }
+
+      .update-cart {
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+      }
+
+      .update-cart:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* ملخص العربة */
+      .cart-summary {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .summary-header {
+        padding: 1.2rem 1.5rem;
+        background-color: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .summary-content {
+        padding: 1.5rem;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .summary-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .summary-row.total {
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 2px solid #eee;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--accent);
+        color: var(--primary-dark);
+        border: none;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+      }
+
+      .checkout-btn:hover {
+        background-color: #c29a29;
+        transform: translateY(-2px);
+      }
+
+      .payment-methods {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .payment-title {
+        font-size: 0.9rem;
+        color: #777;
+        margin-bottom: 0.8rem;
+      }
+
+      .payment-icons {
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+      }
+
+      .payment-icon {
+        font-size: 1.5rem;
+        opacity: 0.7;
+      }
+
+      .shipping-info {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: #777;
+        text-align: center;
+      }
+
+      /* القسم الترويجي */
+      .promo-section {
+        margin-top: 3rem;
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .promo-title {
+        font-size: 1.3rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-right: 0.8rem;
+      }
+
+      .promo-title::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--accent);
+        border-radius: 3px;
+      }
+
+      .related-products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .related-product {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .related-product:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .related-product-image {
+        height: 160px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .related-product-info {
+        padding: 1rem;
+        background-color: var(--white);
+      }
+
+      .related-product-name {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+      }
+
+      .related-product-price {
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+      }
+
+      .add-related-btn {
+        width: 100%;
+        padding: 0.6rem;
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .add-related-btn:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* العربة الفارغة */
+      .empty-cart {
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        display: none; /* سيتم عرضها عبر جافاسكريبت إذا كانت العربة فارغة */
+      }
+
+      .empty-icon {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 1.5rem;
+      }
+
+      .empty-title {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .empty-text {
+        color: #777;
+        margin-bottom: 2rem;
+      }
+
+      .shop-now-btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background-color: var(--primary);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+
+      .shop-now-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      /* تذييل الصفحة */
+      .footer {
+        background-color: #162636;
+        color: var(--white);
+        padding-top: 4rem;
+        margin-top: 5rem;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-logo .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .footer-logo .brand-name {
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+
+      .footer-about {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .footer-heading {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-heading::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--accent);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+        display: inline-block;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+        transform: translateX(-5px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .copyright {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      /* تحسينات الموبايل */
+      @media screen and (max-width: 992px) {
+        .cart-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .cart-header {
+          grid-template-columns: 2fr 1fr 1fr 40px;
+        }
+
+        .cart-header .header-check,
+        .cart-header .header-price {
+          display: none;
+        }
+
+        .cart-item {
+          grid-template-columns: 2fr 1fr 1fr 40px;
+          padding: 1rem;
+        }
+
+        .cart-item .item-check,
+        .cart-item .item-price {
+          display: none;
+        }
+
+        .cart-actions {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .cart-action-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .mobile-toggle {
+          display: block;
+        }
+
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+
+        .page-title {
+          font-size: 2rem;
+        }
+
+        .related-products {
+          grid-template-columns: 1fr;
+        }
+
+        .cart-item {
+          grid-template-columns: 2fr 1fr 40px;
+        }
+
+        .cart-header {
+          grid-template-columns: 2fr 1fr 40px;
+        }
+
+        .cart-header .header-subtotal {
+          display: none;
+        }
+
+        .cart-item .item-subtotal {
+          display: none;
+        }
+
+        .item-info {
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: right;
+        }
+
+        .item-image {
+          width: 100%;
+          height: auto;
+          margin-bottom: 1rem;
+        }
+
+        .footer-top {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-logo {
+          justify-content: center;
+        }
+
+        .footer-heading::after {
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+      <div class="logo-container">
+        <div class="logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#203E5F" />
+            <path d="M20 20 H 80 V 50 H 50 V 80 H 20 Z" fill="#D4AF37" />
+          </svg>
+        </div>
+        <div class="brand-name">جوريم</div>
+      </div>
+
+      <button class="mobile-toggle">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="index4.html">الرئيسية</a></li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="#">من نحن</a></li>
+        <li><a href="#">اتصل بنا</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <button class="cart-button">
+          <span>العربة</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- رأس صفحة العربة -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-title">عربة التسوق</h1>
+        <div class="breadcrumb">
+          <a href="index.html">الرئيسية</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">عربة التسوق</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- قسم العربة -->
+    <section class="cart-section">
+      <div class="cart-container">
+        <div class="cart-layout">
+          <div class="cart-main">
+            <!-- جدول العربة -->
+            <div class="cart-table">
+              <div class="cart-header">
+                <div class="header-check"></div>
+                <div class="header-product">المنتج</div>
+                <div class="header-price">السعر</div>
+                <div class="header-quantity">الكمية</div>
+                <div class="header-subtotal">المجموع</div>
+                <div class="header-remove"></div>
+              </div>
+              <div class="cart-items">
+                <!-- عنصر العربة 1 -->
+                <div class="cart-item">
+                  <div class="item-check">
+                    <input type="checkbox" checked />
+                  </div>
+                  <div class="item-info">
+                    <div class="item-image">
+                      <svg
+                        viewBox="0 0 120 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="20"
+                          y="30"
+                          width="80"
+                          height="60"
+                          stroke="#203E5F"
+                          stroke-width="3"
+                          fill="none"
+                          rx="2"
+                        />
+                        <rect
+                          x="25"
+                          y="35"
+                          width="70"
+                          height="50"
+                          stroke="#315780"
+                          stroke-width="1.5"
+                          fill="#F0F4F8"
+                          rx="1"
+                        />
+                        <rect
+                          x="100"
+                          y="57"
+                          width="5"
+                          height="10"
+                          fill="#203E5F"
+                          rx="1"
+                        />
+                      </svg>
+                    </div>
+                    <div class="item-details">
+                      <h3 class="item-name">باب وصول للسقف - ألومنيوم 80*80</h3>
+                      <div class="item-meta">
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect
+                              x="3"
+                              y="3"
+                              width="18"
+                              height="18"
+                              rx="2"
+                              ry="2"
+                            ></rect>
+                          </svg>
+                          80×80 سم
+                        </span>
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
+                            ></path>
+                          </svg>
+                          ألومنيوم
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-price">9.000 د.ك</div>
+                  <div class="item-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <input
+                      type="text"
+                      class="quantity-input"
+                      value="2"
+                      min="1"
+                    />
+                    <button class="quantity-btn increase">+</button>
+                  </div>
+                  <div class="item-subtotal">18.000 د.ك</div>
+                  <button class="remove-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path
+                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                      ></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- عنصر العربة 2 -->
+                <div class="cart-item">
+                  <div class="item-check">
+                    <input type="checkbox" checked />
+                  </div>
+                  <div class="item-info">
+                    <div class="item-image">
+                      <svg
+                        viewBox="0 0 120 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="30"
+                          y="30"
+                          width="60"
+                          height="60"
+                          stroke="#203E5F"
+                          stroke-width="3"
+                          fill="none"
+                          rx="2"
+                        />
+                        <rect
+                          x="35"
+                          y="35"
+                          width="50"
+                          height="50"
+                          stroke="#315780"
+                          stroke-width="1.5"
+                          fill="#F0F4F8"
+                          rx="1"
+                        />
+                        <rect
+                          x="90"
+                          y="57"
+                          width="5"
+                          height="10"
+                          fill="#203E5F"
+                          rx="1"
+                        />
+                      </svg>
+                    </div>
+                    <div class="item-details">
+                      <h3 class="item-name">باب وصول للسقف - ألومنيوم 40*40</h3>
+                      <div class="item-meta">
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect
+                              x="3"
+                              y="3"
+                              width="18"
+                              height="18"
+                              rx="2"
+                              ry="2"
+                            ></rect>
+                          </svg>
+                          40×40 سم
+                        </span>
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
+                            ></path>
+                          </svg>
+                          ألومنيوم
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-price">4.000 د.ك</div>
+                  <div class="item-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <input
+                      type="text"
+                      class="quantity-input"
+                      value="1"
+                      min="1"
+                    />
+                    <button class="quantity-btn increase">+</button>
+                  </div>
+                  <div class="item-subtotal">4.000 د.ك</div>
+                  <button class="remove-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path
+                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                      ></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- عنصر العربة 3 -->
+                <div class="cart-item">
+                  <div class="item-check">
+                    <input type="checkbox" checked />
+                  </div>
+                  <div class="item-info">
+                    <div class="item-image">
+                      <svg
+                        viewBox="0 0 120 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="20"
+                          y="20"
+                          width="80"
+                          height="80"
+                          stroke="#203E5F"
+                          stroke-width="3"
+                          fill="none"
+                          rx="2"
+                        />
+                        <rect
+                          x="25"
+                          y="25"
+                          width="70"
+                          height="70"
+                          stroke="#315780"
+                          stroke-width="1.5"
+                          fill="#F0F4F8"
+                          rx="1"
+                        />
+                        <rect
+                          x="100"
+                          y="57"
+                          width="5"
+                          height="10"
+                          fill="#203E5F"
+                          rx="1"
+                        />
+                      </svg>
+                    </div>
+                    <div class="item-details">
+                      <h3 class="item-name">باب وصول للسقف - ألومنيوم 60*60</h3>
+                      <div class="item-meta">
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <rect
+                              x="3"
+                              y="3"
+                              width="18"
+                              height="18"
+                              rx="2"
+                              ry="2"
+                            ></rect>
+                          </svg>
+                          60×60 سم
+                        </span>
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
+                            ></path>
+                          </svg>
+                          ألومنيوم
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-price">7.000 د.ك</div>
+                  <div class="item-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <input
+                      type="text"
+                      class="quantity-input"
+                      value="1"
+                      min="1"
+                    />
+                    <button class="quantity-btn increase">+</button>
+                  </div>
+                  <div class="item-subtotal">7.000 د.ك</div>
+                  <button class="remove-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path
+                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                      ></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="cart-actions">
+                <button class="cart-action-btn continue-shopping">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M19 12H5"></path>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                  </svg>
+                  متابعة التسوق
+                </button>
+                <button class="cart-action-btn update-cart">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path
+                      d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+                    ></path>
+                  </svg>
+                  تحديث العربة
+                </button>
+              </div>
+            </div>
+
+            <!-- القسم الترويجي -->
+            <div class="promo-section">
+              <h3 class="promo-title">قد يعجبك أيضًا</h3>
+              <div class="related-products">
+                <!-- منتج متعلق 1 -->
+                <div class="related-product">
+                  <div class="related-product-image">
+                    <svg
+                      viewBox="0 0 120 120"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="10"
+                        y="30"
+                        width="100"
+                        height="60"
+                        stroke="#203E5F"
+                        stroke-width="3"
+                        fill="none"
+                        rx="2"
+                      />
+                      <rect
+                        x="15"
+                        y="35"
+                        width="90"
+                        height="50"
+                        stroke="#315780"
+                        stroke-width="1.5"
+                        fill="#F0F4F8"
+                        rx="1"
+                      />
+                      <rect
+                        x="110"
+                        y="57"
+                        width="5"
+                        height="10"
+                        fill="#203E5F"
+                        rx="1"
+                      />
+                    </svg>
+                  </div>
+                  <div class="related-product-info">
+                    <h4 class="related-product-name">
+                      باب وصول للسقف - مستطيل 120*60
+                    </h4>
+                    <p class="related-product-price">10.000 د.ك</p>
+                    <button class="add-related-btn">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                      </svg>
+                      إضافة للعربة
+                    </button>
+                  </div>
+                </div>
+
+                <!-- منتج متعلق 2 -->
+                <div class="related-product">
+                  <div class="related-product-image">
+                    <svg
+                      viewBox="0 0 120 120"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="20"
+                        y="20"
+                        width="80"
+                        height="80"
+                        stroke="#203E5F"
+                        stroke-width="3"
+                        fill="none"
+                        rx="2"
+                      />
+                      <rect
+                        x="25"
+                        y="25"
+                        width="70"
+                        height="70"
+                        stroke="#315780"
+                        stroke-width="1.5"
+                        fill="#F0F4F8"
+                        rx="1"
+                      />
+                      <rect
+                        x="100"
+                        y="57"
+                        width="5"
+                        height="10"
+                        fill="#203E5F"
+                        rx="1"
+                      />
+                    </svg>
+                  </div>
+                  <div class="related-product-info">
+                    <h4 class="related-product-name">
+                      باب وصول للسقف - ألومنيوم 50*50
+                    </h4>
+                    <p class="related-product-price">5.000 د.ك</p>
+                    <button class="add-related-btn">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                      </svg>
+                      إضافة للعربة
+                    </button>
+                  </div>
+                </div>
+
+                <!-- منتج متعلق 3 -->
+                <div class="related-product">
+                  <div class="related-product-image">
+                    <svg
+                      viewBox="0 0 120 120"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="20"
+                        y="30"
+                        width="80"
+                        height="40"
+                        stroke="#203E5F"
+                        stroke-width="3"
+                        fill="none"
+                        rx="2"
+                      />
+                      <rect
+                        x="25"
+                        y="35"
+                        width="70"
+                        height="30"
+                        stroke="#315780"
+                        stroke-width="1.5"
+                        fill="#F0F4F8"
+                        rx="1"
+                      />
+                      <rect
+                        x="100"
+                        y="47"
+                        width="5"
+                        height="10"
+                        fill="#203E5F"
+                        rx="1"
+                      />
+                    </svg>
+                  </div>
+                  <div class="related-product-info">
+                    <h4 class="related-product-name">
+                      باب صيانة ألومنيوم - مستطيل 20*40
+                    </h4>
+                    <p class="related-product-price">3.500 د.ك</p>
+                    <button class="add-related-btn">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                      </svg>
+                      إضافة للعربة
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- العربة الفارغة (مخفية) -->
+            <div class="empty-cart">
+              <div class="empty-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="80"
+                  height="80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path
+                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                  ></path>
+                </svg>
+              </div>
+              <h2 class="empty-title">عربة التسوق فارغة</h2>
+              <p class="empty-text">
+                لم تقم بإضافة أي منتجات إلى عربة التسوق حتى الآن.
+              </p>
+              <a href="products.html" class="shop-now-btn">تسوق الآن</a>
+            </div>
+          </div>
+
+          <!-- ملخص العربة -->
+          <div class="cart-summary">
+            <div class="summary-header">ملخص الطلب</div>
+            <div class="summary-content">
+              <div class="summary-row">
+                <span>المجموع الفرعي</span>
+                <span>29.000 د.ك</span>
+              </div>
+              <div class="summary-row">
+                <span>التوصيل</span>
+                <span>مجاني</span>
+              </div>
+              <div class="summary-row">
+                <span>الضريبة (5%)</span>
+                <span>1.450 د.ك</span>
+              </div>
+              <div class="summary-row total">
+                <span>الإجمالي</span>
+                <span>30.450 د.ك</span>
+              </div>
+              <button class="checkout-btn">
+                <span>متابعة الدفع</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+              <div class="payment-methods">
+                <p class="payment-title">طرق الدفع المتاحة</p>
+                <div class="payment-icons">
+                  <span class="payment-icon">💳</span>
+                  <span class="payment-icon">💳</span>
+                  <span class="payment-icon">💳</span>
+                  <span class="payment-icon">💳</span>
+                </div>
+              </div>
+              <div class="shipping-info">
+                الشحن مجاني للطلبات التي تزيد عن 20 د.ك
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-column">
+            <div class="footer-logo">
+              <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="100" fill="#203E5F" />
+                  <path d="M20 20 H 80 V 50 H 50 V 80 H 20 Z" fill="#D4AF37" />
+                </svg>
+              </div>
+              <div class="brand-name">جوريم</div>
+            </div>
+            <p class="footer-about">
+              شركة جوريم للمواد الإنشائية رائدة في تصنيع وتوريد أبواب الألومنيوم
+              عالية الجودة للمشاريع السكنية والتجارية منذ أكثر من 15 عاماً.
+            </p>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">روابط سريعة</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">الرئيسية</a></li>
+              <li><a href="products.html">المنتجات</a></li>
+              <li><a href="#">من نحن</a></li>
+              <li><a href="#">المشاريع</a></li>
+              <li><a href="#">سياسة الضمان</a></li>
+              <li><a href="#">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">المنتجات</h4>
+            <ul class="footer-links">
+              <li><a href="#">أبواب الألومنيوم للسقف</a></li>
+              <li><a href="#">أبواب صيانة</a></li>
+              <li><a href="#">أبواب بمقاسات خاصة</a></li>
+              <li><a href="#">إكسسوارات الأبواب</a></li>
+              <li><a href="#">مقابض ومفصلات</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">تواصل معنا</h4>
+            <ul class="footer-links">
+              <li>المنطقة الصناعية، شارع 25، مبنى 103</li>
+              <li>هاتف: 0000 1234 965+</li>
+              <li>البريد الإلكتروني: info@joreem.com</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 جميع الحقوق محفوظة لشركة جوريم للمواد الإنشائية
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- سكريبت تفاعلي -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // تغيير شكل شريط التنقل عند التمرير
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // زيادة ونقصان الكمية
+        const quantityInputs = document.querySelectorAll(".quantity-input");
+        const decreaseBtns = document.querySelectorAll(".decrease");
+        const increaseBtns = document.querySelectorAll(".increase");
+
+        decreaseBtns.forEach((btn, index) => {
+          btn.addEventListener("click", function () {
+            let value = parseInt(quantityInputs[index].value);
+            if (value > 1) {
+              value--;
+              quantityInputs[index].value = value;
+              updateSubtotal(index);
+            }
+          });
+        });
+
+        increaseBtns.forEach((btn, index) => {
+          btn.addEventListener("click", function () {
+            let value = parseInt(quantityInputs[index].value);
+            value++;
+            quantityInputs[index].value = value;
+            updateSubtotal(index);
+          });
+        });
+
+        quantityInputs.forEach((input, index) => {
+          input.addEventListener("change", function () {
+            let value = parseInt(this.value);
+            if (isNaN(value) || value < 1) {
+              this.value = 1;
+            }
+            updateSubtotal(index);
+          });
+        });
+
+        function updateSubtotal(index) {
+          const priceText =
+            document.querySelectorAll(".item-price")[index].textContent;
+          const price = parseFloat(
+            priceText.replace(" د.ك", "").replace(",", "")
+          );
+          const quantity = parseInt(quantityInputs[index].value);
+          const subtotal = (price * quantity).toFixed(3);
+          document.querySelectorAll(".item-subtotal")[index].textContent =
+            subtotal + " د.ك";
+
+          // تحديث الإجمالي
+          updateTotal();
+        }
+
+        function updateTotal() {
+          let subtotal = 0;
+          document.querySelectorAll(".item-subtotal").forEach((item) => {
+            const itemSubtotal = parseFloat(
+              item.textContent.replace(" د.ك", "").replace(",", "")
+            );
+            subtotal += itemSubtotal;
+          });
+
+          // تحديث المجموع الفرعي
+          document.querySelector(
+            ".summary-row:first-child span:last-child"
+          ).textContent = subtotal.toFixed(3) + " د.ك";
+
+          // حساب الضريبة
+          const tax = (subtotal * 0.05).toFixed(3);
+          document.querySelector(
+            ".summary-row:nth-child(3) span:last-child"
+          ).textContent = tax + " د.ك";
+
+          // تحديث الإجمالي
+          const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(3);
+          document.querySelector(
+            ".summary-row.total span:last-child"
+          ).textContent = total + " د.ك";
+        }
+
+        // حذف عنصر من العربة
+        const removeButtons = document.querySelectorAll(".remove-item");
+        removeButtons.forEach((btn, index) => {
+          btn.addEventListener("click", function () {
+            const cartItem = this.closest(".cart-item");
+            cartItem.style.opacity = "0";
+            setTimeout(() => {
+              cartItem.remove();
+
+              // التحقق مما إذا كانت العربة فارغة
+              const cartItems = document.querySelectorAll(".cart-item");
+              if (cartItems.length === 0) {
+                document.querySelector(".cart-table").style.display = "none";
+                document.querySelector(".promo-section").style.display = "none";
+                document.querySelector(".empty-cart").style.display = "block";
+                document.querySelector(".cart-summary").style.display = "none";
+              } else {
+                updateTotal();
+              }
+            }, 300);
+            cartItem.style.transition = "opacity 0.3s ease";
+          });
+        });
+
+        // متابعة التسوق
+        const continueShoppingBtn =
+          document.querySelector(".continue-shopping");
+        if (continueShoppingBtn) {
+          continueShoppingBtn.addEventListener("click", function () {
+            window.location.href = "products.html";
+          });
+        }
+
+        // تحديث العربة
+        const updateCartBtn = document.querySelector(".update-cart");
+        if (updateCartBtn) {
+          updateCartBtn.addEventListener("click", function () {
+            alert("تم تحديث العربة بنجاح!");
+          });
+        }
+
+        // متابعة الدفع
+        const checkoutBtn = document.querySelector(".checkout-btn");
+        if (checkoutBtn) {
+          checkoutBtn.addEventListener("click", function () {
+            window.location.href = "checkout.html";
+          });
+        }
+
+        // إضافة منتج متعلق للعربة
+        const addRelatedBtns = document.querySelectorAll(".add-related-btn");
+        addRelatedBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const productName = this.closest(".related-product").querySelector(
+              ".related-product-name"
+            ).textContent;
+            alert("تمت إضافة " + productName + " إلى العربة!");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

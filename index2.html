@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>جوريم للمواد الإنشائية</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap");
+
+      :root {
+        --primary: #2d4654;
+        --secondary: #4a7a8c;
+        --accent: #c8d5bb;
+        --light: #e8f1f2;
+        --dark: #1e2d35;
+      }
+
+      body {
+        font-family: "Tajawal", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        direction: rtl;
+      }
+
+      /* Navbar */
+      .navbar {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 40px;
+        margin-left: 10px;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        color: #555;
+        text-decoration: none;
+        padding: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-cart {
+        position: relative;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(to left, #2d4654, #4a7a8c);
+        color: white;
+        padding: 5rem 0;
+        position: relative;
+      }
+
+      .hero-container {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .hero-content {
+        flex: 1;
+      }
+
+      .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-image-container {
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      .btn-primary:hover {
+        background-color: #f1f1f1;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn-outline:hover {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 0;
+        background-color: white;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      .section-title p {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        width: 64px;
+        height: 64px;
+        background-color: rgba(45, 70, 84, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .feature-card p {
+        color: #666;
+      }
+
+      /* Products Section */
+      .products {
+        padding: 5rem 0;
+        background-color: #f8f9fa;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .quick-view {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--primary);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .product-card:hover .quick-view {
+        opacity: 1;
+      }
+
+      .product-image {
+        height: 200px;
+        background-color: #f1f1f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-info h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .product-price {
+        color: var(--primary);
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .add-to-cart {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart:hover {
+        background-color: #1e3242;
+      }
+
+      /* About Section */
+      .about {
+        padding: 5rem 0;
+        background-color: var(--primary);
+        color: white;
+        transform: skewY(-3deg);
+        margin: 6rem 0;
+      }
+
+      .about-container {
+        transform: skewY(3deg);
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .about-content {
+        flex: 1;
+      }
+
+      .about-image {
+        flex: 1;
+      }
+
+      .about-image-container {
+        width: 100%;
+        height: 300px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .about h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .about p {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #1a1a1a;
+        color: white;
+        padding: 4rem 0 2rem;
+      }
+
+      .footer-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-logo img {
+        height: 40px;
+        margin-left: 10px;
+      }
+
+      .footer p {
+        color: #999;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-links {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 1rem;
+      }
+
+      .footer-links a {
+        color: #999;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .newsletter-form {
+        display: flex;
+      }
+
+      .newsletter-input {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .newsletter-button {
+        padding: 0.75rem 1rem;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px 0 0 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .newsletter-button:hover {
+        background-color: #3a5c6d;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #333;
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        text-align: center;
+        color: #666;
+      }
+
+      /* Cart Notification */
+      .cart-notification {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        background-color: #4caf50;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateX(-200%);
+        transition: transform 0.5s ease;
+        z-index: 1001;
+      }
+
+      .cart-notification.show {
+        transform: translateX(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-container,
+        .about-container {
+          flex-direction: column;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cart Notification -->
+    <div class="cart-notification">
+      <span>تمت إضافة المنتج إلى سلة التسوق!</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <div class="logo">
+          <div
+            style="
+              width: 40px;
+              height: 40px;
+              background-color: #2d4654;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-weight: bold;
+              margin-left: 10px;
+            "
+          >
+            J
+          </div>
+          <span class="logo-text">جوريم</span>
+        </div>
+        <div class="nav-links">
+          <a href="#">الرئيسية</a>
+          <a href="#products">المنتجات</a>
+          <a href="#about">من نحن</a>
+          <a href="#contact">تواصل معنا</a>
+        </div>
+        <div class="nav-cart">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+          <span class="cart-count">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <h1>مواد إنشائية بجودة عالية</h1>
+          <p>
+            نقدم مجموعة واسعة من المواد الإنشائية عالية الجودة لتلبية احتياجاتك
+          </p>
+          <div>
+            <a href="#products" class="btn btn-primary">تصفح المنتجات</a>
+            <a href="#contact" class="btn btn-outline">تواصل معنا</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-image-container">
+            <div
+              style="
+                width: 120px;
+                height: 120px;
+                background-color: #2d4654;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                font-size: 40px;
+              "
+            >
+              J
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>لماذا تختار <span style="color: var(--primary)">جوريم</span>؟</h2>
+          <p>نحن نقدم منتجات عالية الجودة ونضمن رضا العملاء</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                style="color: var(--primary)"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3>جودة عالية</h3>
+            <p>نوفر منتجات بأعلى معايير الجودة لضمان رضا عملائنا</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                style="color: var(--primary)"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3>توصيل سريع</h3>
+            <p>نضمن وصول المنتجات إلى موقع العمل في الوقت المحدد</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                style="color: var(--primary)"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+              </svg>
+            </div>
+            <h3>أسعار تنافسية</h3>
+            <p>نقدم أفضل الأسعار في السوق مع الحفاظ على الجودة</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+      <div class="container">
+        <div class="section-title">
+          <h2>منتجاتنا</h2>
+          <p>تصفح مجموعتنا الواسعة من المنتجات عالية الجودة</p>
+        </div>
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="quick-view">نظرة سريعة</div>
+            <div class="product-image">
+              <div
+                style="
+                  width: 80px;
+                  height: 80px;
+                  background-color: #eaeaea;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #aaa;
+                "
+              >
+                صورة المنتج
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>باب صيانة ألومنيوم 20*20</h3>
+              <p class="product-price">10.000 د.ك</p>
+              <button class="add-to-cart">إضافة للعربة</button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="quick-view">نظرة سريعة</div>
+            <div class="product-image">
+              <div
+                style="
+                  width: 80px;
+                  height: 80px;
+                  background-color: #eaeaea;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #aaa;
+                "
+              >
+                صورة المنتج
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>باب وصول للسقف - ألومنيوم 120*60</h3>
+              <p class="product-price">10.000 د.ك</p>
+              <button class="add-to-cart">إضافة للعربة</button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="quick-view">نظرة سريعة</div>
+            <div class="product-image">
+              <div
+                style="
+                  width: 80px;
+                  height: 80px;
+                  background-color: #eaeaea;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #aaa;
+                "
+              >
+                صورة المنتج
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>باب وصول للسقف - ألومنيوم 80*80</h3>
+              <p class="product-price">9.000 د.ك</p>
+              <button class="add-to-cart">إضافة للعربة</button>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="quick-view">نظرة سريعة</div>
+            <div class="product-image">
+              <div
+                style="
+                  width: 80px;
+                  height: 80px;
+                  background-color: #eaeaea;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #aaa;
+                "
+              >
+                صورة المنتج
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>باب وصول للسقف - ألومنيوم 60*60</h3>
+              <p class="product-price">7.000 د.ك</p>
+              <button class="add-to-cart">إضافة للعربة</button>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem">
+          <a href="#" class="btn btn-primary">عرض المزيد من المنتجات</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container about-container">
+        <div class="about-content">
+          <h2>من نحن</h2>
+          <p>
+            شركة جوريم للمواد الإنشائية هي شركة رائدة في مجال توفير مواد البناء
+            والإنشاءات عالية الجودة. تأسست الشركة بهدف تلبية احتياجات السوق
+            المحلي من المواد الإنشائية المتميزة.
+          </p>
+          <p>
+            نحن نفخر بتقديم منتجات تلبي أعلى معايير الجودة والسلامة، ونسعى
+            دائمًا لتطوير خدماتنا لتحقيق رضا عملائنا.
+          </p>
+          <a href="#contact" class="btn btn-primary">تواصل معنا</a>
+        </div>
+        <div class="about-image">
+          <div class="about-image-container">
+            <div
+              style="
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                opacity: 0.7;
+              "
+            >
+              صورة الشركة
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-container">
+        <div>
+          <div class="footer-logo">
+            <div
+              style="
+                width: 40px;
+                height: 40px;
+                background-color: #2d4654;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                margin-left: 10px;
+              "
+            >
+              J
+            </div>
+            <span style="font-size: 1.5rem; font-weight: bold">جوريم</span>
+          </div>
+          <p>
+            شركة رائدة في مجال توفير مواد البناء والإنشاءات عالية الجودة. نسعى
+            دائماً لتقديم أفضل المنتجات وخدمة العملاء.
+          </p>
+          <div style="display: flex; gap: 1rem">
+            <a
+              href="#"
+              style="
+                width: 36px;
+                height: 36px;
+                background-color: #333;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                />
+              </svg>
+            </a>
+            <a
+              href="#"
+              style="
+                width: 36px;
+                height: 36px;
+                background-color: #333;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                />
+              </svg>
+            </a>
+            <a
+              href="#"
+              style="
+                width: 36px;
+                height: 36px;
+                background-color: #333;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#products">المنتجات</a></li>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>النشرة الإخبارية</h3>
+          <p>اشترك في نشرتنا الإخبارية للحصول على آخر الأخبار والعروض</p>
+          <form class="newsletter-form">
+            <input
+              type="email"
+              placeholder="البريد الإلكتروني"
+              class="newsletter-input"
+            />
+            <button type="submit" class="newsletter-button">اشترك</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 جوريم للمواد الإنشائية. جميع الحقوق محفوظة.</p>
+      </div>
+    </footer>
+
+    <!-- Simple JavaScript for demo -->
+    <script>
+      // Show cart notification when Add to Cart is clicked
+      const addToCartButtons = document.querySelectorAll(".add-to-cart");
+      const cartNotification = document.querySelector(".cart-notification");
+      const cartCount = document.querySelector(".cart-count");
+
+      let count = 0;
+
+      addToCartButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Update cart count
+          count++;
+          cartCount.textContent = count;
+
+          // Show notification
+          cartNotification.classList.add("show");
+
+          // Hide notification after 3 seconds
+          setTimeout(() => {
+            cartNotification.classList.remove("show");
+          }, 3000);
+        });
+      });
+    </script>
+  </body>
+</html>

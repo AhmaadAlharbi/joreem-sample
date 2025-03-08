@@ -1,0 +1,3056 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>منتجات جوريم للمواد الإنشائية | أبواب ألومنيوم عالية الجودة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* المتغيرات وإعدادات الألوان */
+      :root {
+        --primary: #203e5f;
+        --primary-light: #315780;
+        --primary-dark: #132845;
+        --secondary: #00547a;
+        --accent: #d4af37;
+        --accent-light: #f4e9c9;
+        --white: #ffffff;
+        --light-gray: #f0f4f8;
+        --dark-gray: #4a4a4a;
+        --transition: all 0.4s ease;
+      }
+
+      /* إعدادات عامة */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        color: var(--dark-gray);
+        overflow-x: hidden;
+        background-color: var(--light-gray);
+      }
+
+      /* شريط التنقل */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        background-color: var(--white);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+      }
+
+      .navbar.scrolled {
+        padding: 0.7rem 5%;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+      }
+
+      .nav-links a {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        right: 0;
+        background-color: var(--accent);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .cart-button {
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 5px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .cart-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--primary);
+        cursor: pointer;
+      }
+
+      /* رأس صفحة المنتجات */
+      .products-header {
+        padding: 8rem 0 4rem;
+        background-color: var(--primary);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .products-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+      }
+
+      .products-header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+
+      .products-title {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+      }
+
+      .products-subtitle {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      .floating-dots {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .dot {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--accent);
+        opacity: 0.3;
+      }
+
+      .dot:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation: float 6s infinite ease-in-out;
+      }
+
+      .dot:nth-child(2) {
+        top: 30%;
+        right: 15%;
+        animation: float 8s infinite ease-in-out;
+      }
+
+      .dot:nth-child(3) {
+        bottom: 30%;
+        left: 20%;
+        animation: float 7s infinite ease-in-out;
+      }
+
+      .dot:nth-child(4) {
+        bottom: 20%;
+        right: 10%;
+        animation: float 9s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(15px);
+        }
+      }
+
+      /* قسم المرشحات وأدوات البحث */
+      .filters-section {
+        background-color: var(--white);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 70px;
+        z-index: 50;
+      }
+
+      .filters-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .filter-label {
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .filter-dropdown,
+      .search-input {
+        padding: 0.6rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: "Cairo", sans-serif;
+        min-width: 150px;
+      }
+
+      .filter-dropdown:focus,
+      .search-input:focus {
+        border-color: var(--primary);
+        outline: none;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        flex-grow: 1;
+        max-width: 400px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding-left: 2.5rem;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 10px;
+        color: #999;
+      }
+
+      .view-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .view-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        transition: var(--transition);
+      }
+
+      .view-btn.active,
+      .view-btn:hover {
+        color: var(--primary);
+      }
+
+      /* قسم عرض المنتجات */
+      .products-main {
+        padding: 3rem 0 5rem;
+      }
+
+      .products-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+
+      .products-results {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .results-count {
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .sort-dropdown {
+        padding: 0.6rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: "Cairo", sans-serif;
+      }
+
+      /* عرض الشبكة */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      /* بطاقة المنتج */
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        padding: 2rem;
+        background-color: #f9f9f9;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 280px;
+      }
+
+      .svg-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .svg-container svg {
+        max-width: 80%;
+        max-height: 200px;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .svg-container svg {
+        transform: scale(1.1);
+      }
+
+      .product-actions {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: var(--transition);
+      }
+
+      .product-card:hover .product-actions {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .action-btn {
+        width: 35px;
+        height: 35px;
+        background-color: var(--white);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .action-btn:hover {
+        background-color: var(--primary);
+        color: var(--white);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 2;
+      }
+
+      .product-badge-sale {
+        background-color: #e74c3c;
+      }
+
+      .product-badge-new {
+        background-color: #27ae60;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .product-category {
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 0.8rem;
+      }
+
+      .product-meta {
+        display: flex;
+        gap: 1.2rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--dark-gray);
+      }
+
+      .product-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .product-description {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .stars {
+        display: flex;
+        color: var(--accent);
+      }
+
+      .rating-count {
+        font-size: 0.85rem;
+        color: #999;
+      }
+
+      .product-price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .product-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .price-old {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1rem;
+        margin-right: 0.8rem;
+      }
+
+      .price-current {
+        color: #e74c3c;
+      }
+
+      .add-to-cart-btn {
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .add-to-cart-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      /* عرض قائمة المنتجات */
+      .products-list {
+        display: none; /* سيتم تفعيله عبر جافا سكريبت */
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .product-list-item {
+        display: flex;
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .product-list-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .list-item-image {
+        flex: 0 0 300px;
+        padding: 1.5rem;
+        background-color: #f9f9f9;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .list-item-content {
+        flex-grow: 1;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .list-item-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .list-item-title-group {
+        flex-grow: 1;
+      }
+
+      .list-item-price-group {
+        text-align: left;
+      }
+
+      .list-item-details {
+        flex-grow: 1;
+        display: flex;
+        gap: 2rem;
+      }
+
+      .list-item-specs {
+        flex: 1;
+      }
+
+      .specs-title {
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        color: var(--primary-dark);
+      }
+
+      .specs-list {
+        list-style: none;
+      }
+
+      .specs-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .list-item-description {
+        flex: 2;
+      }
+
+      .list-item-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .action-btn-text {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: var(--white);
+        border: 1px solid var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        color: var(--primary);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .action-btn-text:hover {
+        background-color: var(--primary-light);
+        color: var(--white);
+      }
+
+      /* تصفح الصفحات */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+        gap: 0.5rem;
+      }
+
+      .page-btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        background-color: var(--white);
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .page-btn.active {
+        background-color: var(--primary);
+        color: var(--white);
+        border-color: var(--primary);
+      }
+
+      .page-btn:hover:not(.active) {
+        background-color: var(--light-gray);
+      }
+
+      /* تذييل الصفحة */
+      .footer {
+        background-color: #162636;
+        color: var(--white);
+        padding-top: 4rem;
+      }
+
+      .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-logo .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .footer-logo .brand-name {
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+
+      .footer-about {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .footer-heading {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-heading::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--accent);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+        display: inline-block;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+        transform: translateX(-5px);
+      }
+
+      .newsletter-text {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .newsletter-form {
+        display: flex;
+      }
+
+      .newsletter-input {
+        flex-grow: 1;
+        padding: 0.8rem 1rem;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        font-family: "Cairo", sans-serif;
+      }
+
+      .newsletter-btn {
+        background-color: var(--accent);
+        color: var(--primary-dark);
+        border: none;
+        padding: 0 1.2rem;
+        border-radius: 0 5px 5px 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .newsletter-btn:hover {
+        background-color: #c29a29;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .copyright {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      .footer-payment {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .payment-icons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .payment-icon {
+        font-size: 1.2rem;
+      }
+
+      /* تحسينات الموبايل */
+      @media screen and (max-width: 992px) {
+        .filters-container {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .filter-group {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .search-bar {
+          max-width: 100%;
+        }
+
+        .products-results {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .product-list-item {
+          flex-direction: column;
+        }
+
+        .list-item-image {
+          flex: auto;
+          width: 100%;
+        }
+
+        .list-item-details {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .list-item-actions {
+          justify-content: flex-start;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .mobile-toggle {
+          display: block;
+        }
+
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+
+        .products-title {
+          font-size: 2.2rem;
+        }
+
+        .view-toggle {
+          display: none;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          max-width: 450px;
+          margin: 0 auto;
+        }
+
+        .footer-top {
+          grid-template-columns: 1fr;
+          max-width: 450px;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+        }
+
+        .footer-logo {
+          justify-content: center;
+        }
+
+        .footer-heading::after {
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+      <div class="logo-container">
+        <div class="logo">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#203E5F" />
+            <path d="M20 20 H 80 V 50 H 50 V 80 H 20 Z" fill="#D4AF37" />
+          </svg>
+        </div>
+        <div class="brand-name">جوريم</div>
+      </div>
+
+      <button class="mobile-toggle">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="index4.html">الرئيسية</a></li>
+        <li>
+          <a href="products.html" style="color: var(--accent)">المنتجات</a>
+        </li>
+        <li><a href="#">من نحن</a></li>
+        <li><a href="#">اتصل بنا</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <button class="cart-button">
+          <span>العربة</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- رأس صفحة المنتجات -->
+    <header class="products-header">
+      <div class="floating-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <div class="products-header-content">
+        <h1 class="products-title">جميع منتجاتنا</h1>
+        <p class="products-subtitle">
+          استكشف مجموعتنا الواسعة من أبواب الألومنيوم عالية الجودة بمختلف
+          الأحجام والتصاميم
+        </p>
+      </div>
+    </header>
+
+    <!-- قسم المرشحات وأدوات البحث -->
+    <section class="filters-section">
+      <div class="filters-container">
+        <div class="filter-group">
+          <span class="filter-label">تصفية حسب:</span>
+          <select class="filter-dropdown" id="category-filter">
+            <option value="all">جميع الفئات</option>
+            <option value="large">أبواب كبيرة</option>
+            <option value="medium">أبواب متوسطة</option>
+            <option value="small">أبواب صغيرة</option>
+          </select>
+
+          <select class="filter-dropdown" id="size-filter">
+            <option value="all">جميع الأحجام</option>
+            <option value="80x80">80×80 سم</option>
+            <option value="60x60">60×60 سم</option>
+            <option value="50x50">50×50 سم</option>
+            <option value="40x40">40×40 سم</option>
+            <option value="20x20">20×20 سم</option>
+          </select>
+
+          <select class="filter-dropdown" id="price-filter">
+            <option value="all">جميع الأسعار</option>
+            <option value="low">أقل من 5.000 د.ك</option>
+            <option value="medium">5.000 - 8.000 د.ك</option>
+            <option value="high">أكثر من 8.000 د.ك</option>
+          </select>
+        </div>
+
+        <div class="search-bar">
+          <div class="search-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="ابحث عن منتج..."
+          />
+        </div>
+
+        <div class="view-toggle">
+          <button class="view-btn active" id="grid-view">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button class="view-btn" id="list-view">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم عرض المنتجات -->
+    <section class="products-main">
+      <div class="products-container">
+        <div class="products-results">
+          <div class="results-count">
+            <span>يتم عرض 12 منتج من أصل 24</span>
+          </div>
+
+          <div class="sort-options">
+            <select class="sort-dropdown" id="sort-products">
+              <option value="featured">مميز</option>
+              <option value="price-asc">السعر: من الأقل للأعلى</option>
+              <option value="price-desc">السعر: من الأعلى للأقل</option>
+              <option value="newest">الأحدث</option>
+              <option value="rating">التقييم</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- عرض شبكة المنتجات -->
+        <div class="products-grid" id="products-grid">
+          <!-- منتج 1 -->
+          <div class="product-card" data-category="large">
+            <div class="product-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="20"
+                    y="40"
+                    width="160"
+                    height="120"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="30"
+                    y="50"
+                    width="140"
+                    height="100"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="180"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    80×80 سم
+                  </text>
+                </svg>
+              </div>
+              <div class="product-badge">الأكثر مبيعاً</div>
+              <div class="product-actions">
+                <button class="action-btn" title="إضافة للمفضلة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="مقارنة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="عرض سريع">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="product-category">أبواب كبيرة</span>
+              <h3 class="product-title">باب وصول للسقف - ألومنيوم 80*80</h3>
+              <div class="product-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                  </svg>
+                  80×80 سم
+                </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  </svg>
+                  ألومنيوم
+                </span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                </div>
+                <span class="rating-count">(35)</span>
+              </div>
+              <p class="product-description">
+                باب ألومنيوم بتصميم عملي وعصري يناسب الاستخدام التجاري والسكني
+                بتشطيب عالي الجودة.
+              </p>
+              <div class="product-price-row">
+                <p class="product-price">9.000 د.ك</p>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- منتج 2 -->
+          <div class="product-card" data-category="medium">
+            <div class="product-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="30"
+                    y="30"
+                    width="140"
+                    height="140"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="40"
+                    y="40"
+                    width="120"
+                    height="120"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="170"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    60×60 سم
+                  </text>
+                </svg>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="إضافة للمفضلة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="مقارنة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="عرض سريع">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="product-category">أبواب متوسطة</span>
+              <h3 class="product-title">باب وصول للسقف - ألومنيوم 60*60</h3>
+              <div class="product-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                  </svg>
+                  60×60 سم
+                </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  </svg>
+                  ألومنيوم
+                </span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                </div>
+                <span class="rating-count">(48)</span>
+              </div>
+              <p class="product-description">
+                باب متوسط الحجم مثالي للاستخدامات المنزلية وأعمال الصيانة، بقفل
+                محكم ومقاوم للعوامل الجوية.
+              </p>
+              <div class="product-price-row">
+                <p class="product-price">7.000 د.ك</p>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- منتج 3 -->
+          <div class="product-card" data-category="small">
+            <div class="product-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="40"
+                    y="30"
+                    width="120"
+                    height="140"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="50"
+                    y="40"
+                    width="100"
+                    height="120"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="160"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    20×20 سم
+                  </text>
+                </svg>
+              </div>
+              <div class="product-badge product-badge-sale">خصم 10%</div>
+              <div class="product-actions">
+                <button class="action-btn" title="إضافة للمفضلة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="مقارنة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="عرض سريع">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="product-category">أبواب صغيرة</span>
+              <h3 class="product-title">باب صيانة ألومنيوم 20*20</h3>
+              <div class="product-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                  </svg>
+                  20×20 سم
+                </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  </svg>
+                  ألومنيوم
+                </span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                </div>
+                <span class="rating-count">(26)</span>
+              </div>
+              <p class="product-description">
+                باب صغير مثالي لفتحات الصيانة وأعمال الدكت، خفيف الوزن وسهل
+                التركيب.
+              </p>
+              <div class="product-price-row">
+                <div class="product-price">
+                  <span class="price-old">10.000 د.ك</span>
+                  <span class="price-current">9.000 د.ك</span>
+                </div>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- منتج 4 -->
+          <div class="product-card" data-category="small">
+            <div class="product-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="50"
+                    y="50"
+                    width="100"
+                    height="100"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="60"
+                    y="60"
+                    width="80"
+                    height="80"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="150"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    40×40 سم
+                  </text>
+                </svg>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="إضافة للمفضلة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="مقارنة">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                </button>
+                <button class="action-btn" title="عرض سريع">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="product-category">أبواب صغيرة</span>
+              <h3 class="product-title">باب وصول للسقف - ألومنيوم 40*40</h3>
+              <div class="product-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                  </svg>
+                  40×40 سم
+                </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  </svg>
+                  ألومنيوم
+                </span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                </div>
+                <span class="rating-count">(31)</span>
+              </div>
+              <p class="product-description">
+                مصمم للأسقف المستعارة والمساحات الصغيرة، يتميز بإطار مقاوم للصدأ
+                ومقبض مريح.
+              </p>
+              <div class="product-price-row">
+                <p class="product-price">4.000 د.ك</p>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- يمكن إضافة المزيد من المنتجات هنا... -->
+        </div>
+
+        <!-- عرض قائمة المنتجات -->
+        <div class="products-list" id="products-list">
+          <!-- منتج قائمة 1 -->
+          <div class="product-list-item">
+            <div class="list-item-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="20"
+                    y="40"
+                    width="160"
+                    height="120"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="30"
+                    y="50"
+                    width="140"
+                    height="100"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="180"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    80×80 سم
+                  </text>
+                </svg>
+              </div>
+              <div class="product-badge">الأكثر مبيعاً</div>
+            </div>
+            <div class="list-item-content">
+              <div class="list-item-header">
+                <div class="list-item-title-group">
+                  <span class="product-category">أبواب كبيرة</span>
+                  <h3 class="product-title">باب وصول للسقف - ألومنيوم 80*80</h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                    </div>
+                    <span class="rating-count">(35)</span>
+                  </div>
+                </div>
+                <div class="list-item-price-group">
+                  <p class="product-price">9.000 د.ك</p>
+                  <span class="stock-status">متوفر</span>
+                </div>
+              </div>
+              <div class="list-item-details">
+                <div class="list-item-specs">
+                  <h4 class="specs-title">المواصفات:</h4>
+                  <ul class="specs-list">
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      الأبعاد: 80×80 سم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      المادة: ألومنيوم عالي الجودة
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      السماكة: 1.2 ملم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      الوزن: 4.5 كجم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      اللون: فضي
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-item-description">
+                  <p>
+                    باب ألومنيوم بتصميم عملي وعصري يناسب الاستخدام التجاري
+                    والسكني بتشطيب عالي الجودة. مناسب للأسقف المستعارة ويوفر
+                    وصولاً سهلاً للخدمات الموجودة فوق السقف. يتميز الباب
+                    بمقاومته للصدأ والتآكل ومتانته العالية لضمان عمر افتراضي
+                    طويل. مصنوع من ألومنيوم عالي الجودة مع إطار متين ومفصلات
+                    قوية تضمن سهولة الفتح والإغلاق.
+                  </p>
+                </div>
+              </div>
+              <div class="list-item-actions">
+                <button class="action-btn-text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                  المفضلة
+                </button>
+                <button class="action-btn-text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                  مقارنة
+                </button>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- منتج قائمة 2 -->
+          <div class="product-list-item">
+            <div class="list-item-image">
+              <div class="svg-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="30"
+                    y="30"
+                    width="140"
+                    height="140"
+                    stroke="#203E5F"
+                    stroke-width="4"
+                    fill="none"
+                    rx="2"
+                  />
+                  <rect
+                    x="40"
+                    y="40"
+                    width="120"
+                    height="120"
+                    stroke="#315780"
+                    stroke-width="2"
+                    fill="#F0F4F8"
+                    rx="1"
+                  />
+                  <rect
+                    x="170"
+                    y="95"
+                    width="8"
+                    height="20"
+                    fill="#203E5F"
+                    rx="1"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    font-family="Arial"
+                    font-size="12"
+                    fill="#203E5F"
+                    text-anchor="middle"
+                  >
+                    60×60 سم
+                  </text>
+                </svg>
+              </div>
+            </div>
+            <div class="list-item-content">
+              <div class="list-item-header">
+                <div class="list-item-title-group">
+                  <span class="product-category">أبواب متوسطة</span>
+                  <h3 class="product-title">باب وصول للسقف - ألومنيوم 60*60</h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        ></polygon>
+                      </svg>
+                    </div>
+                    <span class="rating-count">(48)</span>
+                  </div>
+                </div>
+                <div class="list-item-price-group">
+                  <p class="product-price">7.000 د.ك</p>
+                  <span class="stock-status">متوفر</span>
+                </div>
+              </div>
+              <div class="list-item-details">
+                <div class="list-item-specs">
+                  <h4 class="specs-title">المواصفات:</h4>
+                  <ul class="specs-list">
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      الأبعاد: 60×60 سم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      المادة: ألومنيوم عالي الجودة
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      السماكة: 1.0 ملم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      الوزن: 3.8 كجم
+                    </li>
+                    <li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path
+                          d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                        ></path>
+                      </svg>
+                      اللون: فضي
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-item-description">
+                  <p>
+                    باب متوسط الحجم مثالي للاستخدامات المنزلية وأعمال الصيانة،
+                    بقفل محكم ومقاوم للعوامل الجوية. يوفر هذا الباب حلاً ممتازاً
+                    للوصول إلى المناطق المخفية في الأسقف المستعارة، ويتميز
+                    بسهولة التركيب والاستخدام. مصنوع من أجود أنواع الألومنيوم
+                    المضاد للصدأ، مما يضمن متانته وعمره الطويل حتى في البيئات
+                    الرطبة.
+                  </p>
+                </div>
+              </div>
+              <div class="list-item-actions">
+                <button class="action-btn-text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                  المفضلة
+                </button>
+                <button class="action-btn-text">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 16l-4-4-4 4"></path>
+                    <path d="M12 12V3"></path>
+                    <path
+                      d="M8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4"
+                    ></path>
+                  </svg>
+                  مقارنة
+                </button>
+                <button class="add-to-cart-btn">
+                  إضافة للعربة
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- يمكن إضافة المزيد من منتجات القائمة هنا... -->
+        </div>
+
+        <!-- تصفح الصفحات -->
+        <div class="pagination">
+          <button class="page-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">...</button>
+          <button class="page-btn">5</button>
+          <button class="page-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-column">
+            <div class="footer-logo">
+              <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="100" fill="#203E5F" />
+                  <path d="M20 20 H 80 V 50 H 50 V 80 H 20 Z" fill="#D4AF37" />
+                </svg>
+              </div>
+              <div class="brand-name">جوريم</div>
+            </div>
+            <p class="footer-about">
+              شركة جوريم للمواد الإنشائية رائدة في تصنيع وتوريد أبواب الألومنيوم
+              عالية الجودة للمشاريع السكنية والتجارية منذ أكثر من 15 عاماً.
+            </p>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">روابط سريعة</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">الرئيسية</a></li>
+              <li><a href="products.html">المنتجات</a></li>
+              <li><a href="#">من نحن</a></li>
+              <li><a href="#">المشاريع</a></li>
+              <li><a href="#">سياسة الضمان</a></li>
+              <li><a href="#">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">المنتجات</h4>
+            <ul class="footer-links">
+              <li><a href="#">أبواب الألومنيوم للسقف</a></li>
+              <li><a href="#">أبواب صيانة</a></li>
+              <li><a href="#">أبواب بمقاسات خاصة</a></li>
+              <li><a href="#">إكسسوارات الأبواب</a></li>
+              <li><a href="#">مقابض ومفصلات</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4 class="footer-heading">النشرة البريدية</h4>
+            <p class="newsletter-text">
+              اشترك في نشرتنا البريدية للحصول على آخر التحديثات والعروض الخاصة
+            </p>
+            <div class="newsletter-form">
+              <input
+                type="email"
+                placeholder="أدخل بريدك الإلكتروني"
+                class="newsletter-input"
+              />
+              <button class="newsletter-btn">اشتراك</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 جميع الحقوق محفوظة لشركة جوريم للمواد الإنشائية
+          </p>
+          <div class="footer-payment">
+            <span>طرق الدفع المتاحة:</span>
+            <div class="payment-icons">
+              <span class="payment-icon">💳</span>
+              <span class="payment-icon">💳</span>
+              <span class="payment-icon">💳</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- سكريبت تفاعلي -->
+    <script>
+      // تحميل المستند
+      document.addEventListener("DOMContentLoaded", function () {
+        // تغيير شكل شريط التنقل عند التمرير
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // التبديل بين عرض الشبكة وعرض القائمة
+        const gridView = document.getElementById("grid-view");
+        const listView = document.getElementById("list-view");
+        const productsGrid = document.getElementById("products-grid");
+        const productsList = document.getElementById("products-list");
+
+        if (gridView && listView && productsGrid && productsList) {
+          gridView.addEventListener("click", function () {
+            gridView.classList.add("active");
+            listView.classList.remove("active");
+            productsGrid.style.display = "grid";
+            productsList.style.display = "none";
+          });
+
+          listView.addEventListener("click", function () {
+            listView.classList.add("active");
+            gridView.classList.remove("active");
+            productsList.style.display = "flex";
+            productsGrid.style.display = "none";
+          });
+        }
+
+        // تصفية المنتجات
+        const categoryFilter = document.getElementById("category-filter");
+        const sizeFilter = document.getElementById("size-filter");
+        const priceFilter = document.getElementById("price-filter");
+        const sortProducts = document.getElementById("sort-products");
+        const productCards = document.querySelectorAll(".product-card");
+
+        function filterProducts() {
+          const categoryValue = categoryFilter.value;
+          const sizeValue = sizeFilter.value;
+          const priceValue = priceFilter.value;
+
+          productCards.forEach((card) => {
+            let showCard = true;
+
+            // تصفية حسب الفئة
+            if (
+              categoryValue !== "all" &&
+              !card.getAttribute("data-category").includes(categoryValue)
+            ) {
+              showCard = false;
+            }
+
+            // يمكن إضافة المزيد من منطق التصفية هنا...
+
+            if (showCard) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        }
+
+        if (categoryFilter)
+          categoryFilter.addEventListener("change", filterProducts);
+        if (sizeFilter) sizeFilter.addEventListener("change", filterProducts);
+        if (priceFilter) priceFilter.addEventListener("change", filterProducts);
+
+        // أزرار العمل المنتج
+        const addToCartBtns = document.querySelectorAll(".add-to-cart-btn");
+        const actionBtns = document.querySelectorAll(".action-btn");
+
+        addToCartBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            alert("تمت إضافة المنتج للسلة!");
+          });
+        });
+
+        actionBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const action = this.getAttribute("title");
+            if (action) {
+              alert(`تم ${action} المنتج!`);
+            }
+          });
+        });
+
+        // البحث عن المنتجات
+        const searchInput = document.querySelector(".search-input");
+        if (searchInput) {
+          searchInput.addEventListener("input", function () {
+            const searchTerm = this.value.toLowerCase();
+
+            productCards.forEach((card) => {
+              const title = card
+                .querySelector(".product-title")
+                .textContent.toLowerCase();
+              const description = card
+                .querySelector(".product-description")
+                .textContent.toLowerCase();
+
+              if (
+                title.includes(searchTerm) ||
+                description.includes(searchTerm)
+              ) {
+                card.style.display = "flex";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        }
+
+        // تصفح الصفحات
+        const pageBtns = document.querySelectorAll(".page-btn");
+        pageBtns.forEach((btn, index) => {
+          btn.addEventListener("click", function () {
+            if (
+              !this.classList.contains("active") &&
+              this.textContent !== "..."
+            ) {
+              document
+                .querySelector(".page-btn.active")
+                .classList.remove("active");
+              this.classList.add("active");
+              // يمكن إضافة منطق تحميل المنتجات الجديدة هنا
+              window.scrollTo({
+                top: document.querySelector(".products-header").offsetTop,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

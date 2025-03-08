@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>شركة جوريم للمواد الإنشائية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap");
+
+      body {
+        font-family: "Tajawal", sans-serif;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* Updated colors to match the logo (dark blue with gold accents) */
+      .hero-bg {
+        background: linear-gradient(135deg, #1a3045 0%, #2d4858 100%);
+      }
+
+      .custom-shape {
+        background-color: #1a3045;
+        clip-path: ellipse(80% 60% at 50% 40%);
+      }
+
+      .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .hexagon {
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+      }
+
+      .cart-notification {
+        transform: translateY(30px);
+        opacity: 0;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      .cart-notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .diagonal-section {
+        position: relative;
+        padding: 6rem 0;
+      }
+
+      .diagonal-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f3f4f6;
+        transform: skewY(-3deg);
+        transform-origin: top right;
+        z-index: -1;
+      }
+
+      .product-item {
+        transition: all 0.4s ease;
+      }
+
+      .modal {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .modal-content {
+        transition: transform 0.3s ease;
+      }
+
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .counter-input {
+        width: 50px;
+        text-align: center;
+      }
+
+      /* SVG container styling */
+      .svg-container {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Quick View button styling */
+      .quick-view {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(26, 48, 69, 0.7);
+        color: white;
+        border-radius: 50%;
+        height: 36px;
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .product-card:hover .quick-view {
+        opacity: 1;
+      }
+
+      /* New product card styling to match the reference */
+      .product-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .product-info {
+        padding: 1rem;
+      }
+
+      .product-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #1a3045;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a3045;
+        margin-bottom: 1rem;
+      }
+
+      .add-to-cart {
+        width: 100%;
+        background-color: #1a3045;
+        color: white;
+        padding: 0.75rem 0;
+        border-radius: 0;
+        text-align: center;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart:hover {
+        background-color: #122434;
+      }
+
+      .quick-look {
+        color: #1a3045;
+        text-decoration: none;
+        font-size: 0.875rem;
+        display: inline-block;
+        margin-top: 0.5rem;
+      }
+
+      .quick-look:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-md py-4 px-6 sticky top-0 z-50">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-4 space-x-reverse">
+          <!-- Updated logo with the blue/gold theme -->
+          <div
+            style="background-color: #1a3045; padding: 5px; border-radius: 8px"
+          >
+            <img
+              src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
+              alt="شعار جوريم"
+              class="h-14"
+            />
+          </div>
+        </div>
+
+        <nav>
+          <ul class="flex space-x-8 space-x-reverse">
+            <li>
+              <a
+                href="#"
+                class="nav-link text-blue-900 hover:text-blue-700 font-medium"
+                data-page="home"
+                >الرئيسية</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-blue-900 hover:text-blue-700 font-medium"
+                data-page="products"
+                >المنتجات</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-blue-900 hover:text-blue-700 font-medium"
+                data-page="about"
+                >من نحن</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="nav-link text-blue-900 hover:text-blue-700 font-medium"
+                data-page="contact"
+                >اتصل بنا</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="flex items-center">
+          <button
+            id="cart-button"
+            class="relative p-2 text-blue-900 hover:text-yellow-600 transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            <span
+              id="cart-count"
+              class="absolute -top-1 -right-1 bg-yellow-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
+              >0</span
+            >
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+      <!-- Hero Section -->
+      <section class="hero-bg text-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+          <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 mb-12 lg:mb-0">
+              <h2 class="text-5xl font-bold mb-6">
+                أفضل المواد الإنشائية بجودة عالية
+              </h2>
+              <p class="text-xl mb-8">
+                نوفر لكم مجموعة متكاملة من المواد الإنشائية ذات الجودة العالية
+                لضمان متانة وجمال مشاريعكم
+              </p>
+              <div class="flex flex-wrap gap-4">
+                <a
+                  href="#"
+                  class="nav-link bg-yellow-500 text-blue-900 hover:bg-yellow-400 px-8 py-3 rounded-full font-bold transition transform hover:scale-105"
+                  data-page="products"
+                  >استعرض منتجاتنا</a
+                >
+                <a
+                  href="#"
+                  class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-full font-bold transition transform hover:scale-105"
+                  >تواصل معنا</a
+                >
+              </div>
+            </div>
+            <div class="lg:w-1/2 relative">
+              <img
+                src="/api/placeholder/600/400"
+                alt="مواد إنشائية"
+                class="rounded-lg shadow-2xl animate-float"
+              />
+              <div
+                class="absolute -top-8 -right-8 bg-yellow-400 text-blue-900 p-4 rounded-lg shadow-lg transform rotate-12"
+              >
+                <p class="font-bold">جودة عالية</p>
+              </div>
+              <div
+                class="absolute -bottom-6 -left-6 bg-blue-900 text-white p-4 rounded-lg shadow-lg transform -rotate-6"
+              >
+                <p class="font-bold">ضمان لمدة 10 سنوات</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div
+          class="absolute top-1/4 right-10 w-24 h-24 bg-white opacity-10 rounded-full"
+        ></div>
+        <div
+          class="absolute bottom-1/4 left-10 w-32 h-32 bg-yellow-400 opacity-20 rounded-full"
+        ></div>
+        <div
+          class="absolute top-1/3 left-1/3 w-16 h-16 bg-yellow-300 opacity-20 hexagon"
+        ></div>
+      </section>
+
+      <!-- Featured Products Section - Updated with new design -->
+      <section class="py-20 custom-shape text-white">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">منتجاتنا المميزة</h2>
+            <p class="text-xl opacity-80 max-w-3xl mx-auto">
+              اكتشف مجموعتنا المميزة من المواد الإنشائية عالية الجودة التي تضمن
+              لك الحصول على أفضل النتائج في مشاريعك
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Product 1: Aluminum Access Door 20x20 -->
+            <div class="product-card">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="40"
+                      y="30"
+                      width="120"
+                      height="140"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="50"
+                      y="40"
+                      width="100"
+                      height="120"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="160"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      20×20 سم
+                    </text>
+                  </svg>
+                </div>
+                <button class="quick-view">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب صيانة ألومنيوم 20*20</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    20×20 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">10.000 د.ك</p>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="1"
+                data-name="باب صيانة ألومنيوم 20*20"
+                data-price="10"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 2: Aluminum Access Door 80x80 -->
+            <div class="product-card">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="20"
+                      y="40"
+                      width="160"
+                      height="120"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="30"
+                      y="50"
+                      width="140"
+                      height="100"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="180"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      80×80 سم
+                    </text>
+                  </svg>
+                </div>
+                <button class="quick-view">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 80*80</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    80×80 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">9.000 د.ك</p>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="2"
+                data-name="باب وصول للسقف - ألومنيوم 80*80"
+                data-price="9"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 3: Aluminum Access Door 60x60 -->
+            <div class="product-card">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="30"
+                      y="40"
+                      width="140"
+                      height="120"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="40"
+                      y="50"
+                      width="120"
+                      height="100"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="170"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      60×60 سم
+                    </text>
+                  </svg>
+                </div>
+                <button class="quick-view">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 60*60</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    60×60 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">7.000 د.ك</p>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="3"
+                data-name="باب وصول للسقف - ألومنيوم 60*60"
+                data-price="7"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 4: Aluminum Access Door 40x40 -->
+            <div class="product-card">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="40"
+                      y="50"
+                      width="120"
+                      height="100"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="50"
+                      y="60"
+                      width="100"
+                      height="80"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="160"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      40×40 سم
+                    </text>
+                  </svg>
+                </div>
+                <button class="quick-view">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 40*40</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    40×40 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">4.000 د.ك</p>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="4"
+                data-name="باب وصول للسقف - ألومنيوم 40*40"
+                data-price="4"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center mt-12">
+            <a
+              href="#"
+              class="nav-link inline-block bg-yellow-500 text-blue-900 hover:bg-yellow-400 px-8 py-3 rounded-full font-bold transition transform hover:scale-105"
+              data-page="products"
+              >عرض جميع المنتجات</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section class="diagonal-section">
+        <div class="container mx-auto px-6 py-16">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-blue-900 mb-4">
+              لماذا تختار شركة جوريم؟
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              نسعى دائمًا لتقديم أفضل المواد الإنشائية بجودة عالية وأسعار منافسة
+              لعملائنا الكرام
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-blue-900"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-blue-900 mb-3">جودة عالية</h3>
+              <p class="text-gray-600">
+                نوفر مواد إنشائية ذات جودة عالية تتوافق مع المعايير العالمية
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full bg-yellow-100 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-yellow-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-blue-900 mb-3">
+                أسعار منافسة
+              </h3>
+              <p class="text-gray-600">
+                نقدم أسعارًا تنافسية مع الحفاظ على جودة المنتجات
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-blue-900"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-blue-900 mb-3">
+                سرعة التوصيل
+              </h3>
+              <p class="text-gray-600">
+                نضمن وصول المنتجات إلى موقع المشروع في الوقت المحدد
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition text-center"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full bg-yellow-100 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-yellow-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-blue-900 mb-3">دعم فني</h3>
+              <p class="text-gray-600">
+                نوفر دعمًا فنيًا متكاملًا لمساعدتك في اختيار المواد المناسبة
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="py-20 bg-blue-900 text-white">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">آراء عملائنا</h2>
+            <p class="text-xl opacity-80 max-w-3xl mx-auto">
+              نفتخر بثقة عملائنا ونسعى دائمًا لتحقيق رضاهم
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="bg-blue-800 p-8 rounded-xl hover:bg-blue-700 transition"
+            >
+              <div class="text-yellow-400 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+              <p class="mb-6">
+                "جودة المنتجات ممتازة وتوصيل المواد في الوقت المحدد. أنصح
+                بالتعامل مع شركة جوريم لأي مشروع إنشائي."
+              </p>
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-600 rounded-full mr-4"></div>
+                <div>
+                  <h4 class="font-bold">أحمد محمد</h4>
+                  <p class="text-blue-300">مهندس معماري</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-blue-800 p-8 rounded-xl hover:bg-blue-700 transition"
+            >
+              <div class="text-yellow-400 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+              <p class="mb-6">
+                "أسعار منافسة وخدمة عملاء ممتازة. استخدمت منتجاتهم في أكثر من
+                مشروع وكانت النتائج مذهلة."
+              </p>
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-600 rounded-full mr-4"></div>
+                <div>
+                  <h4 class="font-bold">خالد عبدالله</h4>
+                  <p class="text-blue-300">مقاول بناء</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-blue-800 p-8 rounded-xl hover:bg-blue-700 transition"
+            >
+              <div class="text-yellow-400 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 inline-block"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+              <p class="mb-6">
+                "الدعم الفني الذي يقدمونه ساعدني كثيرًا في اختيار المواد
+                المناسبة لمشروعي. سأتعامل معهم مجددًا بكل تأكيد."
+              </p>
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-600 rounded-full mr-4"></div>
+                <div>
+                  <h4 class="font-bold">سارة أحمد</h4>
+                  <p class="text-blue-300">مصممة داخلية</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Products Page -->
+    <div id="products" class="page">
+      <section class="py-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-blue-900 mb-4">منتجاتنا</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              تصفح مجموعتنا الواسعة من المواد الإنشائية عالية الجودة
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 justify-center mb-12">
+            <button
+              class="filter-btn active bg-blue-900 hover:bg-blue-800 text-white px-6 py-2 rounded-full transition"
+              data-category="all"
+            >
+              الكل
+            </button>
+            <button
+              class="filter-btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full transition"
+              data-category="cement"
+            >
+              الأسمنت
+            </button>
+            <button
+              class="filter-btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full transition"
+              data-category="bricks"
+            >
+              الطوب
+            </button>
+            <button
+              class="filter-btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full transition"
+              data-category="sand"
+            >
+              الرمل والحصى
+            </button>
+            <button
+              class="filter-btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full transition"
+              data-category="steel"
+            >
+              الحديد
+            </button>
+            <button
+              class="filter-btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full transition"
+              data-category="access-doors"
+            >
+              أبواب الوصول
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Product 1: Aluminum Access Door 20x20 -->
+            <div class="product-card product-item" data-category="access-doors">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="40"
+                      y="30"
+                      width="120"
+                      height="140"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="50"
+                      y="40"
+                      width="100"
+                      height="120"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="160"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      20×20 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب صيانة ألومنيوم 20*20</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    20×20 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">10.000 د.ك</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="1"
+                data-name="باب صيانة ألومنيوم 20*20"
+                data-price="10"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 2: Aluminum Access Door 80x80 -->
+            <div class="product-card product-item" data-category="access-doors">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="20"
+                      y="40"
+                      width="160"
+                      height="120"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="30"
+                      y="50"
+                      width="140"
+                      height="100"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="180"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      80×80 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 80*80</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    80×80 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">9.000 د.ك</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="2"
+                data-name="باب وصول للسقف - ألومنيوم 80*80"
+                data-price="9"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 3: Aluminum Access Door 60x60 -->
+            <div class="product-card product-item" data-category="access-doors">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="30"
+                      y="40"
+                      width="140"
+                      height="120"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="40"
+                      y="50"
+                      width="120"
+                      height="100"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="170"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      60×60 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 60*60</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    60×60 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">7.000 د.ك</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="3"
+                data-name="باب وصول للسقف - ألومنيوم 60*60"
+                data-price="7"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- Product 4: Aluminum Access Door 40x40 -->
+            <div class="product-card product-item" data-category="access-doors">
+              <div class="relative">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="40"
+                      y="50"
+                      width="120"
+                      height="100"
+                      stroke="#1a3045"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="50"
+                      y="60"
+                      width="100"
+                      height="80"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="160"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#1a3045"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#1a3045"
+                      text-anchor="middle"
+                    >
+                      40×40 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">باب وصول للسقف - ألومنيوم 40*40</h3>
+                <div class="flex flex-wrap gap-2 mt-1 mb-2">
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    40×40 سم
+                  </span>
+                  <span
+                    class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="inline-block ml-1"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price">4.000 د.ك</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart add-to-cart-btn"
+                data-id="4"
+                data-name="باب وصول للسقف - ألومنيوم 40*40"
+                data-price="4"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة للعربة
+              </button>
+            </div>
+
+            <!-- More products from original categories -->
+
+            <!-- Cement Product -->
+            <div class="product-item product-card" data-category="cement">
+              <div class="relative">
+                <img
+                  src="/api/placeholder/400/300"
+                  alt="اسمنت بورتلاند"
+                  class="w-full h-56 object-cover"
+                />
+              </div>
+              <div class="product-info">
+                <span
+                  class="bg-blue-100 text-blue-900 text-sm font-medium px-3 py-1 rounded-full"
+                  >الأسمنت</span
+                >
+                <h3 class="product-title mt-2">اسمنت بورتلاند</h3>
+                <p class="text-gray-600 mb-2 text-sm">
+                  اسمنت عالي الجودة مناسب للأعمال الإنشائية المختلفة
+                </p>
+                <p class="product-price">125 ريال</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart-btn add-to-cart"
+                data-id="5"
+                data-name="اسمنت بورتلاند"
+                data-price="125"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة إلى السلة
+              </button>
+            </div>
+
+            <!-- Bricks Product -->
+            <div class="product-item product-card" data-category="bricks">
+              <div class="relative">
+                <img
+                  src="/api/placeholder/400/300"
+                  alt="طوب أحمر"
+                  class="w-full h-56 object-cover"
+                />
+              </div>
+              <div class="product-info">
+                <span
+                  class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full"
+                  >الطوب</span
+                >
+                <h3 class="product-title mt-2">طوب أحمر</h3>
+                <p class="text-gray-600 mb-2 text-sm">
+                  طوب أحمر عالي الجودة للبناء بمقاسات مختلفة
+                </p>
+                <p class="product-price">3.5 ريال / قطعة</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart-btn add-to-cart"
+                data-id="6"
+                data-name="طوب أحمر"
+                data-price="3.5"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة إلى السلة
+              </button>
+            </div>
+
+            <!-- Sand Product -->
+            <div class="product-item product-card" data-category="sand">
+              <div class="relative">
+                <img
+                  src="/api/placeholder/400/300"
+                  alt="رمل بناء"
+                  class="w-full h-56 object-cover"
+                />
+              </div>
+              <div class="product-info">
+                <span
+                  class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full"
+                  >الرمل</span
+                >
+                <h3 class="product-title mt-2">رمل بناء</h3>
+                <p class="text-gray-600 mb-2 text-sm">
+                  رمل نظيف عالي الجودة للأعمال الإنشائية
+                </p>
+                <p class="product-price">450 ريال / متر مكعب</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart-btn add-to-cart"
+                data-id="7"
+                data-name="رمل بناء"
+                data-price="450"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة إلى السلة
+              </button>
+            </div>
+
+            <!-- Steel Product -->
+            <div class="product-item product-card" data-category="steel">
+              <div class="relative">
+                <img
+                  src="/api/placeholder/400/300"
+                  alt="حديد تسليح"
+                  class="w-full h-56 object-cover"
+                />
+              </div>
+              <div class="product-info">
+                <span
+                  class="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full"
+                  >الحديد</span
+                >
+                <h3 class="product-title mt-2">حديد تسليح</h3>
+                <p class="text-gray-600 mb-2 text-sm">
+                  حديد تسليح عالي الجودة بأقطار مختلفة
+                </p>
+                <p class="product-price">220 دينار كويتي / طن</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-gray-500 ml-2">الكمية:</span>
+                  <select
+                    class="quantity-select bg-gray-100 border border-gray-300 rounded"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                class="add-to-cart-btn add-to-cart"
+                data-id="8"
+                data-name="حديد تسليح"
+                data-price="220"
+                data-img="/api/placeholder/400/300"
+              >
+                إضافة إلى السلة
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="cart" class="page">
+      <section class="py-16">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-blue-900 mb-4">سلة التسوق</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              المنتجات التي قمت بإضافتها إلى السلة
+            </p>
+          </div>
+
+          <div id="cart-empty" class="text-center hidden">
+            <img
+              src="/api/placeholder/200/200"
+              alt="سلة فارغة"
+              class="mx-auto mb-6"
+            />
+            <h3 class="text-2xl font-bold text-gray-700 mb-4">
+              سلة التسوق فارغة
+            </h3>
+            <p class="text-gray-500 mb-8">
+              لم تقم بإضافة أي منتجات إلى السلة بعد
+            </p>
+            <a
+              href="#"
+              class="nav-link bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-full font-bold transition"
+              data-page="products"
+              >استعرض المنتجات</a
+            >
+          </div>
+
+          <div id="cart-items">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead class="bg-blue-900 text-white">
+                    <tr>
+                      <th class="py-4 px-6 text-right">المنتج</th>
+                      <th class="py-4 px-6 text-center">السعر (د.ك)</th>
+                      <th class="py-4 px-6 text-center">الكمية</th>
+                      <th class="py-4 px-6 text-center">المجموع (د.ك)</th>
+                      <th class="py-4 px-6"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cart-products">
+                    <!-- Products will be added here dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+              <div class="lg:w-2/3">
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                  <h3 class="text-2xl font-bold text-blue-900 mb-6">
+                    هل لديك كود خصم؟
+                  </h3>
+                  <div class="flex">
+                    <input
+                      type="text"
+                      placeholder="أدخل كود الخصم"
+                      class="w-full border border-gray-300 rounded-r-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                    <button
+                      class="bg-blue-900 hover:bg-blue-800 text-white py-3 px-6 rounded-l-md transition"
+                    >
+                      تطبيق
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lg:w-1/3">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                  <h3 class="text-2xl font-bold text-blue-900 mb-6">
+                    ملخص الطلب
+                  </h3>
+                  <div class="space-y-4">
+                    <div
+                      class="flex justify-between pb-4 border-b border-gray-200"
+                    >
+                      <span class="text-gray-600">المجموع الفرعي:</span>
+                      <span id="subtotal" class="font-bold">0 دينار كويتي</span>
+                    </div>
+                    <div
+                      class="flex justify-between pb-4 border-b border-gray-200"
+                    >
+                      <span class="text-gray-600">التوصيل:</span>
+                      <span class="font-bold">3 دينار كويتي</span>
+                    </div>
+                    <div
+                      class="flex justify-between pb-4 border-b border-gray-200"
+                    >
+                      <span class="text-gray-600">الضريبة (15%):</span>
+                      <span id="tax" class="font-bold">0 دينار كويتي</span>
+                    </div>
+                    <div class="flex justify-between text-xl">
+                      <span class="font-bold text-blue-900">المجموع:</span>
+                      <span id="total" class="font-bold text-blue-900"
+                        >0 دينار كويتي</span
+                      >
+                    </div>
+                  </div>
+                  <button
+                    id="checkout-btn"
+                    class="bg-blue-900 hover:bg-blue-800 text-white py-4 w-full rounded-lg font-bold mt-8 transition transform hover:scale-105"
+                  >
+                    متابعة الدفع
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Add to Cart Notification -->
+    <div
+      id="cart-notification"
+      class="cart-notification fixed bottom-8 right-8 bg-white rounded-lg shadow-lg p-4 flex items-center z-50"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 mr-3 text-green-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+      <div>
+        <p class="font-bold text-gray-900">تمت الإضافة بنجاح!</p>
+        <p class="text-gray-600 text-sm">تم إضافة المنتج إلى سلة التسوق</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">شركة جوريم</h3>
+            <p class="text-blue-200 mb-4">
+              نوفر مواد إنشائية عالية الجودة لجميع مشاريعك
+            </p>
+            <div class="flex space-x-4 space-x-reverse">
+              <a
+                href="#"
+                class="bg-blue-800 hover:bg-blue-700 h-10 w-10 rounded-full flex items-center justify-center transition"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="bg-blue-800 hover:bg-blue-700 h-10 w-10 rounded-full flex items-center justify-center transition"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="bg-blue-800 hover:bg-blue-700 h-10 w-10 rounded-full flex items-center justify-center transition"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الرئيسية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >المنتجات</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >من نحن</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >اتصل بنا</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >سياسة الخصوصية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الشروط والأحكام</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">فئات المنتجات</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الأسمنت</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الطوب</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الرمل والحصى</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الحديد</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-blue-200 hover:text-white transition"
+                  >الأدوات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-4">
+              <li class="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 ml-3 text-blue-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span class="text-blue-200"
+                  >الرياض، المملكة العربية السعودية</span
+                >
+              </li>
+              <li class="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 ml-3 text-blue-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <span class="text-blue-200">+966 123 456 789</span>
+              </li>
+              <li class="flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 ml-3 text-blue-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <span class="text-blue-200">info@goreem.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-blue-800 mt-12 pt-8 text-center">
+          <p class="text-blue-200">
+            &copy; 2025 شركة جوريم للمواد الإنشائية. جميع الحقوق محفوظة.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Navigation
+      const navLinks = document.querySelectorAll(".nav-link");
+      const pages = document.querySelectorAll(".page");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetPage = link.getAttribute("data-page");
+
+          pages.forEach((page) => {
+            page.classList.remove("active");
+          });
+
+          document.getElementById(targetPage).classList.add("active");
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Products Filter
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const productItems = document.querySelectorAll(".product-item");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((b) =>
+            b.classList.remove("active", "bg-blue-900", "text-white")
+          );
+          filterBtns.forEach((b) =>
+            b.classList.add("bg-gray-200", "text-gray-800")
+          );
+
+          btn.classList.remove("bg-gray-200", "text-gray-800");
+          btn.classList.add("active", "bg-blue-900", "text-white");
+
+          const category = btn.getAttribute("data-category");
+
+          productItems.forEach((item) => {
+            if (
+              category === "all" ||
+              item.getAttribute("data-category") === category
+            ) {
+              item.style.display = "block";
+            } else {
+              item.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // Cart Functionality
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCount = document.getElementById("cart-count");
+      const cartButton = document.getElementById("cart-button");
+      const cartNotification = document.getElementById("cart-notification");
+      const addToCartBtns = document.querySelectorAll(".add-to-cart-btn");
+      const cartProducts = document.getElementById("cart-products");
+      const subtotalElement = document.getElementById("subtotal");
+      const taxElement = document.getElementById("tax");
+      const totalElement = document.getElementById("total");
+      const cartEmpty = document.getElementById("cart-empty");
+      const cartItems = document.getElementById("cart-items");
+
+      // Update cart badge count
+      function updateCartCount() {
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = count;
+
+        if (count === 0) {
+          cartEmpty.classList.remove("hidden");
+          cartItems.classList.add("hidden");
+        } else {
+          cartEmpty.classList.add("hidden");
+          cartItems.classList.remove("hidden");
+        }
+      }
+
+      // Calculate cart totals
+      function calculateTotals() {
+        const subtotal = cart.reduce(
+          (total, item) => total + item.price * item.quantity,
+          0
+        );
+        const tax = subtotal * 0.15;
+        const shipping = 3;
+        const total = subtotal + tax + shipping;
+
+        subtotalElement.textContent = subtotal.toFixed(2) + " دينار كويتي";
+        taxElement.textContent = tax.toFixed(2) + " دينار كويتي";
+        totalElement.textContent = total.toFixed(2) + " دينار كويتي";
+      }
+
+      // Render cart items
+      function renderCart() {
+        cartProducts.innerHTML = "";
+
+        cart.forEach((item, index) => {
+          const tr = document.createElement("tr");
+
+          const subtotal = item.price * item.quantity;
+
+          tr.innerHTML = `
+                    <td class="py-4 px-6 border-b">
+                        <div class="flex items-center">
+                            <img src="${item.img}" alt="${
+            item.name
+          }" class="w-16 h-16 object-cover rounded ml-4">
+                            <div>
+                                <h4 class="font-bold text-blue-900">${
+                                  item.name
+                                }</h4>
+                                <p class="text-sm text-gray-500">رمز المنتج: ${
+                                  item.id
+                                }</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-center border-b">
+                        <span class="font-medium">${item.price.toFixed(
+                          2
+                        )} دينار كويتي</span>
+                    </td>
+                    <td class="py-4 px-6 text-center border-b">
+                        <div class="flex items-center justify-center">
+                            <button class="decrease-btn bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded-l text-gray-700 transition" data-index="${index}">-</button>
+                            <input type="text" class="counter-input h-8 border-y border-gray-200 text-center" value="${
+                              item.quantity
+                            }" readonly>
+                            <button class="increase-btn bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded-r text-gray-700 transition" data-index="${index}">+</button>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-center border-b">
+                        <span class="font-bold text-blue-900">${subtotal.toFixed(
+                          2
+                        )} دينار كويتي</span>
+                    </td>
+                    <td class="py-4 px-6 text-center border-b">
+                        <button class="remove-item text-red-500 hover:text-red-700 transition" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </td>
+                `;
+
+          cartProducts.appendChild(tr);
+        });
+
+        // Add event listeners for quantity buttons and remove buttons
+        const decreaseBtns = document.querySelectorAll(".decrease-btn");
+        const increaseBtns = document.querySelectorAll(".increase-btn");
+        const removeButtons = document.querySelectorAll(".remove-item");
+
+        decreaseBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            if (cart[index].quantity > 1) {
+              cart[index].quantity--;
+              saveCart();
+              renderCart();
+              updateCartCount();
+              calculateTotals();
+            }
+          });
+        });
+
+        increaseBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            cart[index].quantity++;
+            saveCart();
+            renderCart();
+            updateCartCount();
+            calculateTotals();
+          });
+        });
+
+        removeButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+            updateCartCount();
+            calculateTotals();
+          });
+        });
+
+        calculateTotals();
+      }
+
+      // Save cart to localStorage
+      function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      // Add to cart
+      addToCartBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const product = {
+            id: btn.getAttribute("data-id"),
+            name: btn.getAttribute("data-name"),
+            price: parseFloat(btn.getAttribute("data-price")),
+            img: btn.getAttribute("data-img"),
+            quantity: parseInt(
+              btn.parentElement.querySelector(".quantity-select")?.value || 1
+            ),
+          };
+
+          const existingProductIndex = cart.findIndex(
+            (item) => item.id === product.id
+          );
+
+          if (existingProductIndex !== -1) {
+            cart[existingProductIndex].quantity += product.quantity;
+          } else {
+            cart.push(product);
+          }
+
+          saveCart();
+          updateCartCount();
+
+          // Show notification
+          cartNotification.classList.add("show");
+          setTimeout(() => {
+            cartNotification.classList.remove("show");
+          }, 3000);
+        });
+      });
+
+      // Cart button click
+      cartButton.addEventListener("click", () => {
+        pages.forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        document.getElementById("cart").classList.add("active");
+        renderCart();
+      });
+
+      // Checkout button
+      const checkoutBtn = document.getElementById("checkout-btn");
+      checkoutBtn.addEventListener("click", () => {
+        alert("تم إرسال طلبك بنجاح! سيتم التواصل معك قريبًا.");
+        cart = [];
+        saveCart();
+        updateCartCount();
+        renderCart();
+      });
+
+      // Init cart
+      updateCartCount();
+
+      // Animation on scroll
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate featured products
+        gsap.from(".card", {
+          scrollTrigger: {
+            trigger: ".card",
+            start: "top bottom",
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+        });
+
+        // Animate Why Choose Us section
+        gsap.from(".diagonal-section .bg-white", {
+          scrollTrigger: {
+            trigger: ".diagonal-section",
+            start: "top bottom",
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+        });
+      });
+    </script>
+  </body>
+</html>

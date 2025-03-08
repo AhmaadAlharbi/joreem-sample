@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بدائل صور المنتجات | جوريم للمواد الإنشائية</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap");
+
+      :root {
+        --primary: #2d4654;
+        --secondary: #4a7a8c;
+        --accent: #c8d5bb;
+        --light: #e8f1f2;
+        --dark: #1e2d35;
+      }
+
+      body {
+        font-family: "Tajawal", sans-serif;
+        margin: 0;
+        padding: 30px;
+        background-color: #f8f9fa;
+        direction: rtl;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary);
+        margin-bottom: 40px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .styles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .style-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .style-title {
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .products-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      /* Style 1: Geometric Representations */
+      .product-card-1 {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card-1:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image-1 {
+        height: 160px;
+        position: relative;
+        background-color: var(--light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .product-image-1 .door-shape {
+        width: 80%;
+        height: 75%;
+        border: 2px solid var(--primary);
+        border-radius: 4px;
+        background-color: rgba(74, 122, 140, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .product-image-1 .door-handle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        width: 8px;
+        height: 16px;
+        background-color: var(--primary);
+        border-radius: 2px;
+        transform: translateY(-50%);
+      }
+
+      .product-image-1 .size-label {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: var(--primary);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+
+      .product-info-1 {
+        padding: 15px;
+        background-color: white;
+      }
+
+      .product-info-1 h3 {
+        font-size: 0.9rem;
+        margin: 0 0 10px 0;
+        color: var(--dark);
+      }
+
+      .product-price-1 {
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .add-to-cart-1 {
+        width: 100%;
+        padding: 8px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart-1:hover {
+        background-color: #1e3242;
+      }
+
+      /* Style 2: SVG Illustrations */
+      .product-card-2 {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card-2:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image-2 {
+        height: 160px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+      }
+
+      .svg-container {
+        width: 80%;
+        height: 80%;
+      }
+
+      .product-info-2 {
+        padding: 15px;
+      }
+
+      .product-info-2 h3 {
+        font-size: 0.9rem;
+        margin: 0 0 10px 0;
+        color: var(--dark);
+      }
+
+      .product-price-2 {
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .product-meta-2 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+        color: #666;
+      }
+
+      .product-meta-2 span {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+      }
+
+      .product-meta-2 svg {
+        margin-left: 5px;
+      }
+
+      .add-to-cart-2 {
+        width: 100%;
+        padding: 8px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart-2:hover {
+        background-color: #1e3242;
+      }
+
+      /* Style 3: Modern Cards with Dimension Focus */
+      .product-card-3 {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card-3:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-header-3 {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .product-header-3 h3 {
+        font-size: 0.9rem;
+        margin: 0;
+        color: var(--dark);
+      }
+
+      .dimension-display {
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        background-color: #f9f9f9;
+      }
+
+      .dimension-box {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        background-color: rgba(74, 122, 140, 0.2);
+        border: 2px solid var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--primary);
+        font-weight: bold;
+      }
+
+      .dimension-x {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: #666;
+        white-space: nowrap;
+      }
+
+      .dimension-y {
+        position: absolute;
+        right: -50px;
+        top: 50%;
+        transform: translateY(-50%) rotate(90deg);
+        font-size: 0.7rem;
+        color: #666;
+        white-space: nowrap;
+      }
+
+      .product-footer-3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+      }
+
+      .product-price-3 {
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      .add-to-cart-3 {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart-3:hover {
+        background-color: #1e3242;
+      }
+
+      /* Style 4: Color and Material Focus */
+      .product-card-4 {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card-4:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image-4 {
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #e6e6e6 0%, #d1d1d1 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .material-label {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(45, 70, 84, 0.7);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+      }
+
+      .material-texture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .size-badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: white;
+        color: var(--primary);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: bold;
+      }
+
+      .product-info-4 {
+        padding: 15px;
+      }
+
+      .product-info-4 h3 {
+        font-size: 0.9rem;
+        margin: 0 0 10px 0;
+        color: var(--dark);
+      }
+
+      .product-meta-4 {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        color: #666;
+        margin-left: 10px;
+      }
+
+      .meta-item svg {
+        margin-left: 4px;
+        width: 12px;
+        height: 12px;
+      }
+
+      .product-action-4 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .product-price-4 {
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      .add-to-cart-4 {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-to-cart-4:hover {
+        background-color: #1e3242;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>بدائل لصور المنتجات - جوريم للمواد الإنشائية</h1>
+
+      <div class="styles-grid">
+        <!-- Style 1: Geometric Representations -->
+        <div class="style-section">
+          <div class="style-title">١. تمثيل هندسي للمنتجات</div>
+          <div class="products-row">
+            <div class="product-card-1">
+              <div class="product-image-1">
+                <div class="door-shape">
+                  <div class="door-handle"></div>
+                </div>
+                <div class="size-label">20×20</div>
+              </div>
+              <div class="product-info-1">
+                <h3>باب صيانة ألومنيوم 20*20</h3>
+                <p class="product-price-1">10.000 د.ك</p>
+                <button class="add-to-cart-1">إضافة للعربة</button>
+              </div>
+            </div>
+
+            <div class="product-card-1">
+              <div class="product-image-1">
+                <div class="door-shape" style="width: 85%; height: 70%">
+                  <div class="door-handle"></div>
+                </div>
+                <div class="size-label">60×60</div>
+              </div>
+              <div class="product-info-1">
+                <h3>باب وصول للسقف - ألومنيوم 60*60</h3>
+                <p class="product-price-1">7.000 د.ك</p>
+                <button class="add-to-cart-1">إضافة للعربة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Style 2: SVG Illustrations -->
+        <div class="style-section">
+          <div class="style-title">٢. رسومات بصيغة SVG</div>
+          <div class="products-row">
+            <div class="product-card-2">
+              <div class="product-image-2">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="40"
+                      y="30"
+                      width="120"
+                      height="140"
+                      stroke="#2D4654"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="50"
+                      y="40"
+                      width="100"
+                      height="120"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="160"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#2D4654"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#2D4654"
+                      text-anchor="middle"
+                    >
+                      20×20 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info-2">
+                <h3>باب صيانة ألومنيوم 20*20</h3>
+                <div class="product-meta-2">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    20×20 سم
+                  </span>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price-2">10.000 د.ك</p>
+                <button class="add-to-cart-2">إضافة للعربة</button>
+              </div>
+            </div>
+
+            <div class="product-card-2">
+              <div class="product-image-2">
+                <div class="svg-container">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect
+                      x="20"
+                      y="40"
+                      width="160"
+                      height="120"
+                      stroke="#2D4654"
+                      stroke-width="4"
+                      fill="none"
+                      rx="2"
+                    />
+                    <rect
+                      x="30"
+                      y="50"
+                      width="140"
+                      height="100"
+                      stroke="#4A7A8C"
+                      stroke-width="2"
+                      fill="#E8F1F2"
+                      rx="1"
+                    />
+                    <rect
+                      x="180"
+                      y="95"
+                      width="8"
+                      height="20"
+                      fill="#2D4654"
+                      rx="1"
+                    />
+                    <text
+                      x="100"
+                      y="180"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#2D4654"
+                      text-anchor="middle"
+                    >
+                      80×80 سم
+                    </text>
+                  </svg>
+                </div>
+              </div>
+              <div class="product-info-2">
+                <h3>باب وصول للسقف - ألومنيوم 80*80</h3>
+                <div class="product-meta-2">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
+                    </svg>
+                    80×80 سم
+                  </span>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    ألومنيوم
+                  </span>
+                </div>
+                <p class="product-price-2">9.000 د.ك</p>
+                <button class="add-to-cart-2">إضافة للعربة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Style 3: Modern Cards with Dimension Focus -->
+        <div class="style-section">
+          <div class="style-title">٣. التركيز على الأبعاد</div>
+          <div class="products-row">
+            <div class="product-card-3">
+              <div class="product-header-3">
+                <h3>باب صيانة ألومنيوم</h3>
+              </div>
+              <div class="dimension-display">
+                <div class="dimension-box">
+                  <span>120×60</span>
+                  <span class="dimension-x">120 سم</span>
+                  <span class="dimension-y">60 سم</span>
+                </div>
+              </div>
+              <div class="product-footer-3">
+                <div class="product-price-3">10.000 د.ك</div>
+                <button class="add-to-cart-3">إضافة للعربة</button>
+              </div>
+            </div>
+
+            <div class="product-card-3">
+              <div class="product-header-3">
+                <h3>باب وصول للسقف - ألومنيوم</h3>
+              </div>
+              <div class="dimension-display">
+                <div class="dimension-box">
+                  <span>40×40</span>
+                  <span class="dimension-x">40 سم</span>
+                  <span class="dimension-y">40 سم</span>
+                </div>
+              </div>
+              <div class="product-footer-3">
+                <div class="product-price-3">4.000 د.ك</div>
+                <button class="add-to-cart-3">إضافة للعربة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Style 4: Color and Material Focus -->
+        <div class="style-section">
+          <div class="style-title">٤. التركيز على المواد والخامات</div>
+          <div class="products-row">
+            <div class="product-card-4">
+              <div class="product-image-4">
+                <div class="material-texture"></div>
+                <div class="material-label">ألومنيوم</div>
+                <div class="size-badge">50×50</div>
+              </div>
+              <div class="product-info-4">
+                <h3>باب وصول للسقف - ألومنيوم 50*50</h3>
+                <div class="product-meta-4">
+                  <div class="meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                      ></path>
+                    </svg>
+                    ضمان سنة
+                  </div>
+                  <div class="meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    توصيل سريع
+                  </div>
+                </div>
+                <div class="product-action-4">
+                  <div class="product-price-4">5.000 د.ك</div>
+                  <button class="add-to-cart-4">إضافة للعربة</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card-4">
+              <div class="product-image-4">
+                <div class="material-texture"></div>
+                <div class="material-label">ألومنيوم</div>
+                <div class="size-badge">30×30</div>
+              </div>
+              <div class="product-info-4">
+                <h3>باب وصول للسقف - ألومنيوم 30*30</h3>
+                <div class="product-meta-4">
+                  <div class="meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                      ></path>
+                    </svg>
+                    ضمان سنة
+                  </div>
+                  <div class="meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    توصيل سريع
+                  </div>
+                </div>
+                <div class="product-action-4">
+                  <div class="product-price-4">4.000 د.ك</div>
+                  <button class="add-to-cart-4">إضافة للعربة</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
