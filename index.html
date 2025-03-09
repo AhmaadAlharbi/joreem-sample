@@ -32,6 +32,7 @@
         color: var(--dark);
         overflow-x: hidden;
         text-align: right;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .container {
@@ -42,16 +43,13 @@
       }
 
       /* Header / Navbar */
-      /* Header / Navbar */
-      /* Header / Navbar */
       header {
         background-color: white;
         position: fixed;
         top: 0;
         right: 0;
         width: 100%;
-        padding: 20px 0;
-
+        padding: 15px 0;
         z-index: 1000;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
@@ -112,6 +110,17 @@
         background-color: var(--primary-dark);
       }
 
+      /* Mobile menu button */
+      .mobile-menu-button {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--primary);
+        margin-left: 10px;
+      }
+
       /* Cart Icon */
       .cart-icon-container {
         position: relative;
@@ -139,21 +148,6 @@
         align-items: center;
       }
 
-      /* تخصيص سلوك الناف بار على الشاشات الصغيرة */
-      @media (max-width: 768px) {
-        .nav-menu {
-          display: none; /* إخفاء القائمة على الشاشات الصغيرة */
-        }
-
-        .site-logo {
-          height: 40px; /* حجم أصغر للوجو على الشاشات الصغيرة */
-        }
-
-        .nav-right-section {
-          flex: 1;
-          justify-content: flex-end;
-        }
-      }
       /* Enhanced Hero Section With Product Showcase */
       .hero {
         padding-top: 80px;
@@ -199,6 +193,8 @@
         justify-content: center;
         align-items: center;
         position: relative;
+        width: 100%;
+        overflow: hidden;
       }
 
       /* Quick Filter Buttons */
@@ -759,7 +755,127 @@
         font-size: 14px;
       }
 
-      /* Responsive */
+      /* Mobile Menu Overlay */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1500;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+
+      .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        width: 280px;
+        height: 100%;
+        background-color: white;
+        z-index: 1600;
+        transition: all 0.3s;
+        padding: 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+
+      .mobile-menu.active {
+        right: 0;
+      }
+
+      .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--light-gray);
+      }
+
+      .mobile-menu-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--gray);
+      }
+
+      .mobile-menu-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .mobile-menu-link {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--light-gray);
+        transition: color 0.3s;
+      }
+
+      .mobile-menu-link:hover {
+        color: var(--accent);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1200px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* iPhone 12 Pro and similar devices */
+      @media (width: 390px) and (height: 844px),
+        (min-width: 375px) and (max-width: 414px) and (min-height: 800px) {
+        .hero-banner {
+          padding: 30px 0;
+        }
+
+        .nav-button {
+          font-size: 13px;
+          padding: 8px 12px;
+        }
+
+        .quick-filters {
+          margin: 15px 0;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .ceiling-panel {
+          transform: scale(0.9);
+        }
+
+        .warranty-badge-hero {
+          top: 5px;
+          left: 5px;
+        }
+
+        .product-info {
+          padding: 12px;
+        }
+
+        .feature-text {
+          font-size: 12px;
+        }
+
+        .product-card {
+          border-radius: 8px;
+        }
+      }
+
       @media (max-width: 992px) {
         .hero-content {
           grid-template-columns: 1fr;
@@ -795,10 +911,15 @@
 
         .footer-content {
           grid-template-columns: repeat(2, 1fr);
+          gap: 40px;
         }
       }
 
       @media (max-width: 768px) {
+        .mobile-menu-button {
+          display: block;
+        }
+
         .nav-menu {
           display: none;
         }
@@ -808,12 +929,39 @@
           justify-content: flex-end;
         }
 
+        .site-logo {
+          height: 40px;
+        }
+
+        .nav-button {
+          font-size: 14px;
+          padding: 8px 15px;
+        }
+
         .hero-text h1 {
-          font-size: 28px;
+          font-size: 26px;
+        }
+
+        .hero-text p {
+          font-size: 16px;
         }
 
         .products-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+
+        .product-title {
+          font-size: 16px;
+        }
+
+        .product-price {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .product-actions {
+          flex-direction: column;
         }
 
         .feature-item {
@@ -833,8 +981,170 @@
           font-size: 10px;
         }
 
+        .modal {
+          padding: 20px;
+        }
+
+        .modal-actions {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-text h1 {
+          font-size: 24px;
+          line-height: 1.3;
+        }
+
+        .hero-text p {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .hero-content {
+          gap: 15px;
+        }
+
+        /* Fix filter buttons wrapping */
+        .quick-filters {
+          gap: 5px;
+          margin: 15px 0;
+        }
+
+        .filter-btn,
+        .btn-primary {
+          font-size: 12px;
+          padding: 6px 10px;
+        }
+
+        .ceiling-panel {
+          max-width: 100%;
+          height: auto;
+        }
+
+        .warranty-badge-hero {
+          width: 50px;
+          height: 50px;
+          top: 5px;
+          left: 5px;
+        }
+
+        .badge-number-hero {
+          font-size: 20px;
+        }
+
+        .badge-text-hero {
+          font-size: 8px;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+          text-align: center;
+          display: block;
+        }
+
+        .section-title::after {
+          right: 50%;
+          transform: translateX(50%);
+        }
+
         .footer-content {
           grid-template-columns: 1fr;
+        }
+
+        .footer-column h3 {
+          text-align: center;
+        }
+
+        .footer-column h3::after {
+          right: 50%;
+          transform: translateX(50%);
+        }
+
+        .about-text,
+        .footer-links {
+          text-align: center;
+        }
+
+        .contact-item {
+          justify-content: center;
+        }
+
+        .price-current,
+        .price-original {
+          font-size: 16px;
+        }
+
+        .product-dimensions,
+        .discount-badge {
+          font-size: 12px;
+          padding: 4px 8px;
+        }
+
+        .discount-badge {
+          left: 70px;
+        }
+
+        .warranty-badge {
+          width: 40px;
+          height: 40px;
+        }
+
+        .badge-number {
+          font-size: 18px;
+        }
+
+        .badge-text {
+          font-size: 7px;
+        }
+
+        /* Fix product cards display */
+        .product-card {
+          margin-bottom: 15px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+          height: 180px;
+        }
+
+        .product-actions {
+          gap: 8px;
+        }
+
+        .btn-add-cart,
+        .btn-details {
+          padding: 8px;
+          font-size: 14px;
+        }
+      }
+
+      /* Fix for very small screens */
+      @media (max-width: 360px) {
+        .nav-button {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+
+        .site-logo {
+          height: 35px;
+        }
+
+        .quick-filters {
+          gap: 5px;
+        }
+
+        .filter-btn {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+
+        .product-image {
+          height: 180px;
         }
       }
     </style>
@@ -845,7 +1155,7 @@
       <div class="container">
         <nav class="navbar">
           <img
-            src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
+            src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
             alt="Logo"
             class="site-logo"
           />
@@ -858,6 +1168,20 @@
           </div>
 
           <div class="nav-right-section">
+            <button class="mobile-menu-button" id="mobileMenuButton">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z"
+                  fill="#335E7C"
+                />
+              </svg>
+            </button>
             <button class="nav-button">تسوق الآن</button>
             <div class="cart-icon-container" id="cartIcon">
               <svg
@@ -877,6 +1201,26 @@
         </nav>
       </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <img
+          src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
+          alt="Logo"
+          class="site-logo"
+          style="height: 40px"
+        />
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+      </div>
+      <div class="mobile-menu-links">
+        <a href="index.html" class="mobile-menu-link">الرئيسية</a>
+        <a href="#" class="mobile-menu-link">المنتجات</a>
+        <a href="#" class="mobile-menu-link">الأسعار</a>
+        <a href="#" class="mobile-menu-link">اتصل بنا</a>
+      </div>
+    </div>
 
     <!-- Main Content - Product Showcase -->
     <div id="productsSection">
@@ -916,8 +1260,9 @@
               </div>
               <svg
                 class="ceiling-panel"
-                width="400"
-                height="300"
+                width="100%"
+                height="auto"
+                viewBox="0 0 400 300"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <!-- Ceiling background -->
@@ -1982,23 +2327,56 @@
           localStorage.setItem("cart", JSON.stringify([]));
         }
 
-        // Filter functionality
+        // Mobile Menu functionality
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+        const mobileMenuClose = document.getElementById("mobileMenuClose");
+
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.add("active");
+          mobileMenuOverlay.classList.add("active");
+          document.body.style.overflow = "hidden"; // Prevent scrolling
+        });
+
+        function closeMobileMenu() {
+          mobileMenu.classList.remove("active");
+          mobileMenuOverlay.classList.remove("active");
+          document.body.style.overflow = ""; // Re-enable scrolling
+        }
+
+        mobileMenuClose.addEventListener("click", closeMobileMenu);
+        mobileMenuOverlay.addEventListener("click", closeMobileMenu);
+
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+        mobileMenuLinks.forEach((link) => {
+          link.addEventListener("click", closeMobileMenu);
+        });
+
+        // Filter functionality with active state tracking
         const filterButtons = document.querySelectorAll(".filter-btn");
+        const allSizesButton = document.querySelector("[data-size='all']");
         const productCards = document.querySelectorAll(".product-card");
+
+        // Store the current filter selection
+        let currentFilter = "all";
 
         filterButtons.forEach((button) => {
           button.addEventListener("click", () => {
             // Update active button state
+            document.querySelector(".btn-primary").classList.remove("active");
             filterButtons.forEach((btn) => btn.classList.remove("active"));
             button.classList.add("active");
 
-            const selectedSize = button.getAttribute("data-size");
+            // Store the selected size
+            currentFilter = button.getAttribute("data-size");
 
             // Filter products
             productCards.forEach((card) => {
               if (
-                selectedSize === "all" ||
-                card.getAttribute("data-size") === selectedSize
+                currentFilter === "all" ||
+                card.getAttribute("data-size") === currentFilter
               ) {
                 card.style.display = "block";
               } else {
@@ -2008,20 +2386,18 @@
           });
         });
 
-        // Add hover effect for product doors
-        productCards.forEach((card) => {
-          const door = card.querySelector(".product-door");
+        // Reset filter when clicking "all sizes" button
+        if (allSizesButton) {
+          allSizesButton.addEventListener("click", () => {
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            allSizesButton.classList.add("active");
+            currentFilter = "all";
 
-          if (door) {
-            card.addEventListener("mouseenter", () => {
-              door.style.transform = "scale(1.05)";
+            productCards.forEach((card) => {
+              card.style.display = "block";
             });
-
-            card.addEventListener("mouseleave", () => {
-              door.style.transform = "scale(1)";
-            });
-          }
-        });
+          });
+        }
 
         // Add scroll to products on button click
         const ctaButton = document.querySelector(".btn-primary");
@@ -2088,6 +2464,11 @@
             localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
 
+            // Provide haptic feedback for touch devices if supported
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+
             // Clone the SVG from the product card for the modal
             const svgClone = card
               .querySelector(".product-door")
@@ -2119,6 +2500,13 @@
           modal.classList.remove("active");
         });
 
+        // Close modal when clicking outside
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("active");
+          }
+        });
+
         // View cart - redirect to cart page
         viewCart.addEventListener("click", () => {
           modal.classList.remove("active");
@@ -2129,6 +2517,51 @@
         cartIcon.addEventListener("click", () => {
           window.location.href = "cart.html";
         });
+
+        // Make sure SVGs are responsive
+        const svgElements = document.querySelectorAll("svg");
+        svgElements.forEach((svg) => {
+          if (!svg.getAttribute("viewBox")) {
+            const width = svg.getAttribute("width");
+            const height = svg.getAttribute("height");
+            if (width && height) {
+              svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+            }
+          }
+          svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        });
+
+        // Optimize touch targets for mobile
+        const allButtons = document.querySelectorAll(
+          "button, .nav-link, .footer-links a"
+        );
+        allButtons.forEach((button) => {
+          button.addEventListener("touchstart", function () {}, {
+            passive: true,
+          });
+        });
+
+        // Lazy load images as they come into view
+        if ("IntersectionObserver" in window) {
+          const imageObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const img = entry.target;
+                  if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute("data-src");
+                  }
+                  observer.unobserve(img);
+                }
+              });
+            }
+          );
+
+          document.querySelectorAll("img[data-src]").forEach((img) => {
+            imageObserver.observe(img);
+          });
+        }
       });
     </script>
   </body>
