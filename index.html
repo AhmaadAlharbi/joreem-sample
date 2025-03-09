@@ -42,12 +42,16 @@
       }
 
       /* Header / Navbar */
+      /* Header / Navbar */
+      /* Header / Navbar */
       header {
         background-color: white;
         position: fixed;
         top: 0;
         right: 0;
         width: 100%;
+        padding: 20px 0;
+
         z-index: 1000;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
@@ -56,17 +60,25 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
       }
 
-      .logo {
-        width: 120px;
-        height: auto;
+      .site-logo {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
       }
 
       .nav-menu {
         display: flex;
         gap: 30px;
+        align-items: center;
+      }
+
+      .nav-right-section {
+        display: flex;
         align-items: center;
       }
 
@@ -93,6 +105,7 @@
         font-family: "Tajawal", sans-serif;
         font-size: 16px;
         transition: background-color 0.3s;
+        margin-right: 15px;
       }
 
       .nav-button:hover {
@@ -102,12 +115,11 @@
       /* Cart Icon */
       .cart-icon-container {
         position: relative;
-        margin-right: 20px;
       }
 
       .cart-icon {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
         cursor: pointer;
       }
 
@@ -127,6 +139,21 @@
         align-items: center;
       }
 
+      /* تخصيص سلوك الناف بار على الشاشات الصغيرة */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none; /* إخفاء القائمة على الشاشات الصغيرة */
+        }
+
+        .site-logo {
+          height: 40px; /* حجم أصغر للوجو على الشاشات الصغيرة */
+        }
+
+        .nav-right-section {
+          flex: 1;
+          justify-content: flex-end;
+        }
+      }
       /* Enhanced Hero Section With Product Showcase */
       .hero {
         padding-top: 80px;
@@ -342,6 +369,22 @@
         position: relative;
         overflow: hidden;
         padding: 20px;
+        background-image: linear-gradient(
+            45deg,
+            #f5f5f5 25%,
+            transparent 25%,
+            transparent 75%,
+            #f5f5f5 75%
+          ),
+          linear-gradient(
+            45deg,
+            #f5f5f5 25%,
+            transparent 25%,
+            transparent 75%,
+            #f5f5f5 75%
+          );
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
       }
 
       .product-door {
@@ -641,137 +684,6 @@
         background-color: var(--primary-dark);
       }
 
-      /* Cart Page Styles */
-      .cart-page {
-        padding: 120px 0 60px;
-        display: none;
-      }
-
-      .cart-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 30px;
-      }
-
-      .cart-table th {
-        background-color: var(--primary);
-        color: white;
-        padding: 15px;
-        text-align: right;
-      }
-
-      .cart-table td {
-        padding: 15px;
-        border-bottom: 1px solid var(--light-gray);
-      }
-
-      .cart-product {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .cart-product-image {
-        width: 80px;
-        height: 80px;
-        background-color: var(--light);
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .cart-product-info h3 {
-        font-size: 16px;
-        margin-bottom: 5px;
-      }
-
-      .cart-product-info .dimensions {
-        font-size: 14px;
-        color: var(--gray);
-      }
-
-      .quantity-control {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .quantity-btn {
-        width: 30px;
-        height: 30px;
-        background-color: var(--light-gray);
-        border: none;
-        border-radius: 5px;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .quantity-input {
-        width: 50px;
-        height: 30px;
-        text-align: center;
-        border: 1px solid var(--light-gray);
-        border-radius: 5px;
-      }
-
-      .remove-item {
-        background: none;
-        border: none;
-        color: #dc3545;
-        cursor: pointer;
-        font-size: 20px;
-      }
-
-      .cart-summary {
-        background-color: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      .summary-title {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 20px;
-      }
-
-      .summary-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-
-      .summary-label {
-        font-weight: 600;
-      }
-
-      .summary-total {
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--primary);
-      }
-
-      .btn-checkout {
-        display: block;
-        width: 100%;
-        background-color: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: "Tajawal", sans-serif;
-        font-size: 16px;
-        margin-top: 20px;
-        transition: all 0.3s;
-      }
-
-      .btn-checkout:hover {
-        background-color: var(--primary-dark);
-      }
-
       /* Footer */
       footer {
         background-color: var(--primary-dark);
@@ -891,9 +803,9 @@
           display: none;
         }
 
-        .cart-icon-container {
-          display: flex;
-          margin-right: 0;
+        .nav-right-section {
+          flex: 1;
+          justify-content: flex-end;
         }
 
         .hero-text h1 {
@@ -921,54 +833,6 @@
           font-size: 10px;
         }
 
-        .cart-table thead {
-          display: none;
-        }
-
-        .cart-table,
-        .cart-table tbody,
-        .cart-table tr,
-        .cart-table td {
-          display: block;
-          width: 100%;
-        }
-
-        .cart-table tr {
-          margin-bottom: 20px;
-          background-color: white;
-          border-radius: 10px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .cart-table td {
-          text-align: right;
-          padding: 10px 15px;
-          position: relative;
-        }
-
-        .cart-table td::before {
-          content: attr(data-label);
-          font-weight: 600;
-          position: absolute;
-          right: 15px;
-          top: 10px;
-        }
-
-        .cart-table td:last-child {
-          border-bottom: none;
-          text-align: left;
-        }
-
-        .cart-product {
-          padding-right: 100px;
-          min-height: 80px;
-        }
-
-        .cart-product-image {
-          width: 60px;
-          height: 60px;
-        }
-
         .footer-content {
           grid-template-columns: 1fr;
         }
@@ -980,7 +844,20 @@
     <header>
       <div class="container">
         <nav class="navbar">
-          <div class="nav-controls">
+          <img
+            src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
+            alt="Logo"
+            class="site-logo"
+          />
+
+          <div class="nav-menu">
+            <a href="index.html" class="nav-link">الرئيسية</a>
+            <a href="#" class="nav-link">المنتجات</a>
+            <a href="#" class="nav-link">الأسعار</a>
+            <a href="#" class="nav-link">اتصل بنا</a>
+          </div>
+
+          <div class="nav-right-section">
             <button class="nav-button">تسوق الآن</button>
             <div class="cart-icon-container" id="cartIcon">
               <svg
@@ -997,47 +874,6 @@
               <span class="cart-count" id="cartCount">0</span>
             </div>
           </div>
-
-          <div class="nav-menu">
-            <a href="#" class="nav-link">اتصل بنا</a>
-            <a href="#" class="nav-link">الأسعار</a>
-            <a href="#" class="nav-link">المنتجات</a>
-            <a href="#" class="nav-link">الرئيسية</a>
-          </div>
-
-          <svg class="logo" viewBox="0 0 600 160">
-            <rect width="200" height="160" fill="#335E7C" />
-            <rect x="140" y="0" width="60" height="60" fill="#335E7C" />
-            <rect x="140" y="80" width="60" height="80" fill="#335E7C" />
-            <text
-              x="230"
-              y="100"
-              font-family="Arial, sans-serif"
-              font-size="60"
-              font-weight="bold"
-              fill="#335E7C"
-            >
-              JOREEM
-            </text>
-            <text
-              x="230"
-              y="130"
-              font-family="Arial, sans-serif"
-              font-size="22"
-              fill="#335E7C"
-            >
-              For Construction Materials
-            </text>
-            <text
-              x="230"
-              y="155"
-              font-family="Cairo, sans-serif"
-              font-size="18"
-              fill="#335E7C"
-            >
-              شركة جوريم للمواد الإنشائية
-            </text>
-          </svg>
         </nav>
       </div>
     </header>
@@ -1058,17 +894,18 @@
 
               <!-- Quick Filter Buttons -->
               <div class="quick-filters">
-                <button class="filter-btn active" data-size="all">
+                <button
+                  class="btn-primary active"
+                  data-size="all"
+                  onclick="location.reload();"
+                >
                   جميع المقاسات
                 </button>
+
                 <button class="filter-btn" data-size="20×20">20×20</button>
                 <button class="filter-btn" data-size="30×30">30×30</button>
                 <button class="filter-btn" data-size="60×60">60×60</button>
                 <button class="filter-btn" data-size="120×60">120×60</button>
-              </div>
-
-              <div class="hero-cta">
-                <button class="btn-primary">تصفح المنتجات</button>
               </div>
             </div>
             <div class="hero-image">
@@ -1364,84 +1201,142 @@
                     class="product-door"
                     viewBox="0 0 300 300"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="160"
+                    height="160"
                   >
-                    <!-- Access Panel Frame -->
+                    <!-- Ceiling background pattern -->
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      width="300"
+                      height="300"
+                      fill="#f5f5f5"
+                      opacity="0.5"
+                    />
+                    <pattern
+                      id="ceiling-pattern-small-1"
+                      width="20"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect width="20" height="20" fill="#f0f0f0" />
+                      <path
+                        d="M0 0L20 20M20 0L0 20"
+                        stroke="#e8e8e8"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                    <rect
+                      width="300"
+                      height="300"
+                      fill="url(#ceiling-pattern-small-1)"
+                      opacity="0.5"
+                    />
+
+                    <!-- Access Panel Frame - Fixed part -->
+                    <rect
+                      x="75"
+                      y="75"
+                      width="150"
+                      height="150"
                       rx="3"
                       fill="#D6D6D6"
                     />
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      x="75"
+                      y="75"
+                      width="150"
+                      height="150"
                       rx="3"
                       stroke="#335E7C"
                       stroke-width="4"
                       fill="none"
                     />
-                    <!-- Panel Face -->
-                    <rect
-                      x="60"
-                      y="60"
-                      width="180"
-                      height="180"
-                      rx="2"
-                      fill="#F8F9FA"
-                    />
-                    <rect
-                      x="60"
-                      y="60"
-                      width="180"
-                      height="180"
-                      rx="2"
-                      stroke="#335E7C"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <!-- Hinges -->
-                    <rect
-                      x="65"
-                      y="90"
-                      width="7"
-                      height="25"
-                      rx="1"
-                      fill="#A0A0A0"
-                    />
-                    <rect
-                      x="65"
-                      y="185"
-                      width="7"
-                      height="25"
-                      rx="1"
-                      fill="#A0A0A0"
-                    />
-                    <!-- Handle -->
-                    <circle cx="230" cy="150" r="7" fill="#A0A0A0" />
-                    <!-- Panel Interior -->
-                    <rect
-                      x="80"
-                      y="80"
-                      width="140"
-                      height="140"
-                      rx="2"
-                      fill="#FFFFFF"
-                      stroke="#CCCCCC"
-                      stroke-width="1"
-                    />
+
+                    <!-- Panel Face - The door part (rotated to show it's open) -->
+                    <g transform="rotate(-25, 85, 150)">
+                      <rect
+                        x="85"
+                        y="83"
+                        width="134"
+                        height="134"
+                        rx="2"
+                        fill="#F8F9FA"
+                      />
+                      <rect
+                        x="85"
+                        y="83"
+                        width="134"
+                        height="134"
+                        rx="2"
+                        stroke="#335E7C"
+                        stroke-width="2"
+                        fill="none"
+                      />
+
+                      <!-- Hinges -->
+                      <rect
+                        x="88"
+                        y="100"
+                        width="6"
+                        height="22"
+                        rx="1"
+                        fill="#A0A0A0"
+                      />
+                      <rect
+                        x="88"
+                        y="178"
+                        width="6"
+                        height="22"
+                        rx="1"
+                        fill="#A0A0A0"
+                      />
+
+                      <!-- Panel Interior -->
+                      <rect
+                        x="98"
+                        y="98"
+                        width="105"
+                        height="105"
+                        rx="2"
+                        fill="#FFFFFF"
+                        stroke="#CCCCCC"
+                        stroke-width="1"
+                      />
+                      <text
+                        x="150"
+                        y="150"
+                        text-anchor="middle"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="#335E7C"
+                      >
+                        جوريم
+                      </text>
+                    </g>
+
+                    <!-- Handle (on the rotated part) -->
+                    <circle cx="195" cy="150" r="7" fill="#A0A0A0" />
+
+                    <!-- Dimension texts -->
                     <text
                       x="150"
-                      y="155"
+                      y="250"
                       text-anchor="middle"
                       font-family="Arial"
-                      font-size="14"
+                      font-size="12"
                       fill="#335E7C"
                     >
-                      جوريم
+                      20 سم
+                    </text>
+                    <text
+                      x="50"
+                      y="150"
+                      text-anchor="middle"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#335E7C"
+                      transform="rotate(270, 50, 150)"
+                    >
+                      20 سم
                     </text>
                   </svg>
                 </div>
@@ -1479,79 +1374,142 @@
                     class="product-door"
                     viewBox="0 0 300 300"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="160"
+                    height="160"
                   >
+                    <!-- Ceiling background pattern -->
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      width="300"
+                      height="300"
+                      fill="#f5f5f5"
+                      opacity="0.5"
+                    />
+                    <pattern
+                      id="ceiling-pattern-small-2"
+                      width="20"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect width="20" height="20" fill="#f0f0f0" />
+                      <path
+                        d="M0 0L20 20M20 0L0 20"
+                        stroke="#e8e8e8"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                    <rect
+                      width="300"
+                      height="300"
+                      fill="url(#ceiling-pattern-small-2)"
+                      opacity="0.5"
+                    />
+
+                    <!-- Access Panel Frame - Fixed part -->
+                    <rect
+                      x="75"
+                      y="75"
+                      width="150"
+                      height="150"
                       rx="5"
                       fill="#D6D6D6"
                     />
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      x="75"
+                      y="75"
+                      width="150"
+                      height="150"
                       rx="5"
                       stroke="#335E7C"
                       stroke-width="6"
                       fill="none"
                     />
-                    <rect
-                      x="65"
-                      y="65"
-                      width="170"
-                      height="170"
-                      rx="3"
-                      fill="#F8F9FA"
-                    />
-                    <rect
-                      x="65"
-                      y="65"
-                      width="170"
-                      height="170"
-                      rx="3"
-                      stroke="#335E7C"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <rect
-                      x="70"
-                      y="100"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <rect
-                      x="70"
-                      y="170"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <circle cx="220" cy="150" r="10" fill="#A0A0A0" />
-                    <rect
-                      x="90"
-                      y="90"
-                      width="120"
-                      height="120"
-                      rx="2"
-                      fill="#FFFFFF"
-                      stroke="#CCCCCC"
-                      stroke-width="1"
-                    />
+
+                    <!-- Panel Face - The door part (rotated to show it's open) -->
+                    <g transform="rotate(-20, 85, 150)">
+                      <rect
+                        x="85"
+                        y="85"
+                        width="130"
+                        height="130"
+                        rx="3"
+                        fill="#F8F9FA"
+                      />
+                      <rect
+                        x="85"
+                        y="85"
+                        width="130"
+                        height="130"
+                        rx="3"
+                        stroke="#335E7C"
+                        stroke-width="2"
+                        fill="none"
+                      />
+
+                      <!-- Hinges -->
+                      <rect
+                        x="90"
+                        y="105"
+                        width="5"
+                        height="25"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+                      <rect
+                        x="90"
+                        y="170"
+                        width="5"
+                        height="25"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+
+                      <!-- Panel Interior -->
+                      <rect
+                        x="100"
+                        y="100"
+                        width="100"
+                        height="100"
+                        rx="2"
+                        fill="#FFFFFF"
+                        stroke="#CCCCCC"
+                        stroke-width="1"
+                      />
+                      <text
+                        x="150"
+                        y="150"
+                        text-anchor="middle"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="#335E7C"
+                      >
+                        جوريم
+                      </text>
+                    </g>
+
+                    <!-- Handle (on the fixed part) -->
+                    <circle cx="195" cy="150" r="8" fill="#A0A0A0" />
+
+                    <!-- Dimension texts -->
                     <text
                       x="150"
+                      y="250"
+                      text-anchor="middle"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#335E7C"
+                    >
+                      30 سم
+                    </text>
+                    <text
+                      x="50"
                       y="150"
                       text-anchor="middle"
                       font-family="Arial"
-                      font-size="14"
+                      font-size="12"
                       fill="#335E7C"
+                      transform="rotate(270, 50, 150)"
                     >
-                      جوريم
+                      30 سم
                     </text>
                   </svg>
                 </div>
@@ -1589,79 +1547,142 @@
                     class="product-door"
                     viewBox="0 0 300 300"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="160"
+                    height="160"
                   >
+                    <!-- Ceiling background pattern -->
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      width="300"
+                      height="300"
+                      fill="#f5f5f5"
+                      opacity="0.5"
+                    />
+                    <pattern
+                      id="ceiling-pattern-small-3"
+                      width="20"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect width="20" height="20" fill="#f0f0f0" />
+                      <path
+                        d="M0 0L20 20M20 0L0 20"
+                        stroke="#e8e8e8"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                    <rect
+                      width="300"
+                      height="300"
+                      fill="url(#ceiling-pattern-small-3)"
+                      opacity="0.5"
+                    />
+
+                    <!-- Access Panel Frame - Fixed part -->
+                    <rect
+                      x="65"
+                      y="65"
+                      width="170"
+                      height="170"
                       rx="5"
                       fill="#D6D6D6"
                     />
                     <rect
-                      x="50"
-                      y="50"
-                      width="200"
-                      height="200"
+                      x="65"
+                      y="65"
+                      width="170"
+                      height="170"
                       rx="5"
                       stroke="#335E7C"
                       stroke-width="6"
                       fill="none"
                     />
-                    <rect
-                      x="65"
-                      y="65"
-                      width="170"
-                      height="170"
-                      rx="3"
-                      fill="#F8F9FA"
-                    />
-                    <rect
-                      x="65"
-                      y="65"
-                      width="170"
-                      height="170"
-                      rx="3"
-                      stroke="#335E7C"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <rect
-                      x="70"
-                      y="100"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <rect
-                      x="70"
-                      y="170"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <circle cx="220" cy="150" r="10" fill="#A0A0A0" />
-                    <rect
-                      x="90"
-                      y="90"
-                      width="120"
-                      height="120"
-                      rx="2"
-                      fill="#FFFFFF"
-                      stroke="#CCCCCC"
-                      stroke-width="1"
-                    />
+
+                    <!-- Panel Face - The door part (rotated to show it's open) -->
+                    <g transform="rotate(-22, 75, 150)">
+                      <rect
+                        x="80"
+                        y="80"
+                        width="140"
+                        height="140"
+                        rx="3"
+                        fill="#F8F9FA"
+                      />
+                      <rect
+                        x="80"
+                        y="80"
+                        width="140"
+                        height="140"
+                        rx="3"
+                        stroke="#335E7C"
+                        stroke-width="2"
+                        fill="none"
+                      />
+
+                      <!-- Hinges -->
+                      <rect
+                        x="85"
+                        y="100"
+                        width="5"
+                        height="30"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+                      <rect
+                        x="85"
+                        y="170"
+                        width="5"
+                        height="30"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+
+                      <!-- Panel Interior -->
+                      <rect
+                        x="100"
+                        y="100"
+                        width="100"
+                        height="100"
+                        rx="2"
+                        fill="#FFFFFF"
+                        stroke="#CCCCCC"
+                        stroke-width="1"
+                      />
+                      <text
+                        x="150"
+                        y="150"
+                        text-anchor="middle"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="#335E7C"
+                      >
+                        جوريم
+                      </text>
+                    </g>
+
+                    <!-- Handle (on the fixed part) -->
+                    <circle cx="200" cy="150" r="10" fill="#A0A0A0" />
+
+                    <!-- Dimension texts -->
                     <text
                       x="150"
+                      y="260"
+                      text-anchor="middle"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#335E7C"
+                    >
+                      60 سم
+                    </text>
+                    <text
+                      x="40"
                       y="150"
                       text-anchor="middle"
                       font-family="Arial"
-                      font-size="14"
+                      font-size="12"
                       fill="#335E7C"
+                      transform="rotate(270, 40, 150)"
                     >
-                      جوريم
+                      60 سم
                     </text>
                   </svg>
                 </div>
@@ -1699,70 +1720,142 @@
                     class="product-door"
                     viewBox="0 0 300 300"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="160"
+                    height="160"
                   >
-                    <!-- Different aspect ratio for rectangular door -->
+                    <!-- Ceiling background pattern -->
                     <rect
-                      x="30"
-                      y="75"
-                      width="240"
-                      height="150"
+                      width="300"
+                      height="300"
+                      fill="#f5f5f5"
+                      opacity="0.5"
+                    />
+                    <pattern
+                      id="ceiling-pattern-small-4"
+                      width="20"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect width="20" height="20" fill="#f0f0f0" />
+                      <path
+                        d="M0 0L20 20M20 0L0 20"
+                        stroke="#e8e8e8"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                    <rect
+                      width="300"
+                      height="300"
+                      fill="url(#ceiling-pattern-small-4)"
+                      opacity="0.5"
+                    />
+
+                    <!-- Access Panel Frame - Fixed part (rectangular) -->
+                    <rect
+                      x="40"
+                      y="90"
+                      width="220"
+                      height="120"
                       rx="5"
                       fill="#D6D6D6"
                     />
                     <rect
-                      x="30"
-                      y="75"
-                      width="240"
-                      height="150"
+                      x="40"
+                      y="90"
+                      width="220"
+                      height="120"
                       rx="5"
                       stroke="#335E7C"
                       stroke-width="6"
                       fill="none"
                     />
-                    <rect
-                      x="45"
-                      y="85"
-                      width="210"
-                      height="130"
-                      rx="3"
-                      fill="#F8F9FA"
-                    />
-                    <rect
-                      x="45"
-                      y="85"
-                      width="210"
-                      height="130"
-                      rx="3"
-                      stroke="#335E7C"
-                      stroke-width="2"
-                      fill="none"
-                    />
-                    <rect
-                      x="50"
-                      y="110"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <rect
-                      x="50"
-                      y="170"
-                      width="5"
-                      height="30"
-                      rx="2"
-                      fill="#A0A0A0"
-                    />
-                    <circle cx="235" cy="150" r="10" fill="#A0A0A0" />
+
+                    <!-- Panel Face - The door part (rotated to show it's open) -->
+                    <g transform="rotate(-15, 50, 150)">
+                      <rect
+                        x="53"
+                        y="98"
+                        width="194"
+                        height="104"
+                        rx="3"
+                        fill="#F8F9FA"
+                      />
+                      <rect
+                        x="53"
+                        y="98"
+                        width="194"
+                        height="104"
+                        rx="3"
+                        stroke="#335E7C"
+                        stroke-width="2"
+                        fill="none"
+                      />
+
+                      <!-- Hinges -->
+                      <rect
+                        x="58"
+                        y="110"
+                        width="5"
+                        height="25"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+                      <rect
+                        x="58"
+                        y="165"
+                        width="5"
+                        height="25"
+                        rx="2"
+                        fill="#A0A0A0"
+                      />
+
+                      <!-- Panel Interior -->
+                      <rect
+                        x="70"
+                        y="115"
+                        width="160"
+                        height="70"
+                        rx="2"
+                        fill="#FFFFFF"
+                        stroke="#CCCCCC"
+                        stroke-width="1"
+                      />
+                      <text
+                        x="150"
+                        y="150"
+                        text-anchor="middle"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="#335E7C"
+                      >
+                        جوريم
+                      </text>
+                    </g>
+
+                    <!-- Handle (on the fixed part) -->
+                    <circle cx="225" cy="150" r="8" fill="#A0A0A0" />
+
+                    <!-- Dimension texts -->
                     <text
                       x="150"
-                      y="155"
+                      y="230"
                       text-anchor="middle"
                       font-family="Arial"
-                      font-size="14"
+                      font-size="12"
                       fill="#335E7C"
                     >
-                      جوريم
+                      120 سم
+                    </text>
+                    <text
+                      x="30"
+                      y="150"
+                      text-anchor="middle"
+                      font-family="Arial"
+                      font-size="12"
+                      fill="#335E7C"
+                      transform="rotate(270, 30, 150)"
+                    >
+                      60 سم
                     </text>
                   </svg>
                 </div>
@@ -1784,95 +1877,6 @@
           </div>
         </div>
       </section>
-    </div>
-
-    <!-- Cart Page -->
-    <div id="cartPage" class="cart-page">
-      <div class="container">
-        <h1 class="section-title">سلة التسوق</h1>
-
-        <div class="row" style="display: flex; flex-wrap: wrap; gap: 30px">
-          <div style="flex: 3; min-width: 300px">
-            <table class="cart-table">
-              <thead>
-                <tr>
-                  <th>المنتج</th>
-                  <th>السعر</th>
-                  <th>الكمية</th>
-                  <th>الإجمالي</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="cartItems">
-                <!-- Cart items will be inserted here by JavaScript -->
-              </tbody>
-            </table>
-          </div>
-
-          <div style="flex: 1; min-width: 300px">
-            <div class="cart-summary">
-              <h3 class="summary-title">ملخص الطلب</h3>
-
-              <div class="summary-row">
-                <span class="summary-label">عدد المنتجات:</span>
-                <span id="totalItems">0</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">إجمالي الطلب:</span>
-                <span id="totalPrice" class="summary-total">0 د.ك</span>
-              </div>
-
-              <button class="btn-checkout">إتمام الشراء</button>
-              <button
-                class="btn-continue"
-                style="width: 100%; margin-top: 10px"
-                id="continueShopping"
-              >
-                متابعة التسوق
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Added to Cart Modal -->
-    <div class="modal-overlay" id="addToCartModal">
-      <div class="modal">
-        <div class="modal-header">
-          <div class="modal-title">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"
-                fill="#28a745"
-              />
-            </svg>
-            تمت الإضافة إلى العربة
-          </div>
-          <button class="close-modal" id="closeModal">&times;</button>
-        </div>
-
-        <div class="modal-body">
-          <p>تم إضافة المنتج إلى سلة التسوق الخاصة بك.</p>
-          <div class="modal-product" id="modalProduct">
-            <!-- Product info will be inserted here by JavaScript -->
-          </div>
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn-continue" id="continueShopping2">
-            متابعة التسوق
-          </button>
-          <button class="btn-view-cart" id="viewCart">عرض العربة</button>
-        </div>
-      </div>
     </div>
 
     <!-- Footer -->
@@ -1931,6 +1935,44 @@
         </div>
       </div>
     </footer>
+
+    <!-- Added to Cart Modal -->
+    <div class="modal-overlay" id="addToCartModal">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"
+                fill="#28a745"
+              />
+            </svg>
+            تمت الإضافة إلى العربة
+          </div>
+          <button class="close-modal" id="closeModal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <p>تم إضافة المنتج إلى سلة التسوق الخاصة بك.</p>
+          <div class="modal-product" id="modalProduct">
+            <!-- Product info will be inserted here by JavaScript -->
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-continue" id="continueShopping2">
+            متابعة التسوق
+          </button>
+          <button class="btn-view-cart" id="viewCart">عرض العربة</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       // Shopping Cart Functionality
@@ -2000,12 +2042,6 @@
         const viewCart = document.getElementById("viewCart");
         const modalProduct = document.getElementById("modalProduct");
         const cartIcon = document.getElementById("cartIcon");
-        const cartPage = document.getElementById("cartPage");
-        const continueShoppingFromCart =
-          document.getElementById("continueShopping");
-        const cartItems = document.getElementById("cartItems");
-        const totalItemsElement = document.getElementById("totalItems");
-        const totalPriceElement = document.getElementById("totalPrice");
 
         // Update cart count
         function updateCartCount() {
@@ -2052,15 +2088,17 @@
             localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
 
+            // Clone the SVG from the product card for the modal
+            const svgClone = card
+              .querySelector(".product-door")
+              .cloneNode(true);
+            svgClone.setAttribute("width", "50");
+            svgClone.setAttribute("height", "50");
+
             // Show modal with product details
             modalProduct.innerHTML = `
               <div class="modal-product-image">
-                <svg class="product-door" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="50" height="50">
-                  <rect x="50" y="50" width="200" height="200" rx="5" fill="#D6D6D6" />
-                  <rect x="50" y="50" width="200" height="200" rx="5" stroke="#335E7C" stroke-width="6" fill="none" />
-                  <rect x="65" y="65" width="170" height="170" rx="3" fill="#F8F9FA" />
-                  <rect x="65" y="65" width="170" height="170" rx="3" stroke="#335E7C" stroke-width="2" fill="none" />
-                </svg>
+                ${svgClone.outerHTML}
               </div>
               <div class="modal-product-info">
                 <h4 class="modal-product-title">${productName}</h4>
@@ -2081,143 +2119,16 @@
           modal.classList.remove("active");
         });
 
-        // View cart
+        // View cart - redirect to cart page
         viewCart.addEventListener("click", () => {
           modal.classList.remove("active");
-          productsSection.style.display = "none";
-          cartPage.style.display = "block";
-          renderCart();
+          window.location.href = "cart.html";
         });
 
-        // Continue shopping from cart page
-        continueShoppingFromCart.addEventListener("click", () => {
-          cartPage.style.display = "none";
-          productsSection.style.display = "block";
-        });
-
-        // Cart icon click
+        // Cart icon click - redirect to cart page
         cartIcon.addEventListener("click", () => {
-          productsSection.style.display = "none";
-          cartPage.style.display = "block";
-          renderCart();
+          window.location.href = "cart.html";
         });
-
-        // Render cart items
-        function renderCart() {
-          const cart = JSON.parse(localStorage.getItem("cart"));
-          cartItems.innerHTML = "";
-
-          if (cart.length === 0) {
-            cartItems.innerHTML =
-              '<tr><td colspan="5" style="text-align: center; padding: 30px;">سلة التسوق فارغة</td></tr>';
-            totalItemsElement.textContent = "0";
-            totalPriceElement.textContent = "0 د.ك";
-            return;
-          }
-
-          let totalItems = 0;
-          let totalPrice = 0;
-
-          cart.forEach((item) => {
-            const itemTotal = item.price * item.quantity;
-            totalItems += item.quantity;
-            totalPrice += itemTotal;
-
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-              <td data-label="المنتج">
-                <div class="cart-product">
-                  <div class="cart-product-image">
-                    <svg class="product-door" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
-                      <rect x="50" y="50" width="200" height="200" rx="5" fill="#D6D6D6" />
-                      <rect x="50" y="50" width="200" height="200" rx="5" stroke="#335E7C" stroke-width="6" fill="none" />
-                      <rect x="65" y="65" width="170" height="170" rx="3" fill="#F8F9FA" />
-                      <rect x="65" y="65" width="170" height="170" rx="3" stroke="#335E7C" stroke-width="2" fill="none" />
-                    </svg>
-                  </div>
-                  <div class="cart-product-info">
-                    <h3>${item.name}</h3>
-                    <p class="dimensions">المقاس: ${item.size}</p>
-                  </div>
-                </div>
-              </td>
-              <td data-label="السعر">${item.price} د.ك</td>
-              <td data-label="الكمية">
-                <div class="quantity-control">
-                  <button class="quantity-btn minus" data-id="${
-                    item.id
-                  }">-</button>
-                  <input type="text" class="quantity-input" value="${
-                    item.quantity
-                  }" readonly>
-                  <button class="quantity-btn plus" data-id="${
-                    item.id
-                  }">+</button>
-                </div>
-              </td>
-              <td data-label="الإجمالي">${itemTotal.toFixed(2)} د.ك</td>
-              <td>
-                <button class="remove-item" data-id="${item.id}">×</button>
-              </td>
-            `;
-
-            cartItems.appendChild(tr);
-          });
-
-          // Update totals
-          totalItemsElement.textContent = totalItems;
-          totalPriceElement.textContent = `${totalPrice.toFixed(2)} د.ك`;
-
-          // Add event listeners to quantity buttons and remove buttons
-          document.querySelectorAll(".quantity-btn.plus").forEach((button) => {
-            button.addEventListener("click", () => {
-              const productId = button.getAttribute("data-id");
-              updateQuantity(productId, 1);
-            });
-          });
-
-          document.querySelectorAll(".quantity-btn.minus").forEach((button) => {
-            button.addEventListener("click", () => {
-              const productId = button.getAttribute("data-id");
-              updateQuantity(productId, -1);
-            });
-          });
-
-          document.querySelectorAll(".remove-item").forEach((button) => {
-            button.addEventListener("click", () => {
-              const productId = button.getAttribute("data-id");
-              removeItem(productId);
-            });
-          });
-        }
-
-        // Update quantity
-        function updateQuantity(productId, change) {
-          const cart = JSON.parse(localStorage.getItem("cart"));
-          const product = cart.find((item) => item.id === productId);
-
-          if (product) {
-            product.quantity += change;
-
-            if (product.quantity <= 0) {
-              removeItem(productId);
-              return;
-            }
-
-            localStorage.setItem("cart", JSON.stringify(cart));
-            updateCartCount();
-            renderCart();
-          }
-        }
-
-        // Remove item
-        function removeItem(productId) {
-          let cart = JSON.parse(localStorage.getItem("cart"));
-          cart = cart.filter((item) => item.id !== productId);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          updateCartCount();
-          renderCart();
-        }
       });
     </script>
   </body>

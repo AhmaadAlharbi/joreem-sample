@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سلة التسوق | جوريم</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800;900&display=swap");
+
+      :root {
+        --primary: #335e7c;
+        --primary-dark: #1a3e5a;
+        --primary-light: #4a7fa6;
+        --accent: #e6b54a;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --border-color: #dee2e6;
+        --success: #28a745;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        overflow-x: hidden;
+        text-align: right;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header / Navbar */
+      header {
+        background-color: white;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        padding: 20px 0;
+
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .site-logo {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .nav-right-section {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover {
+        color: var(--accent);
+      }
+
+      .nav-button {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-right: 15px;
+      }
+
+      .nav-button:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* Cart Icon */
+      .cart-icon-container {
+        position: relative;
+      }
+
+      .cart-icon {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        background-color: var(--accent);
+        color: var(--dark);
+        font-size: 12px;
+        font-weight: bold;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* تخصيص سلوك الناف بار على الشاشات الصغيرة */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none; /* إخفاء القائمة على الشاشات الصغيرة */
+        }
+
+        .site-logo {
+          height: 40px; /* حجم أصغر للوجو على الشاشات الصغيرة */
+        }
+
+        .nav-right-section {
+          flex: 1;
+          justify-content: flex-end;
+        }
+      }
+
+      /* Main Cart Page */
+      .cart-page {
+        padding: 120px 0 60px;
+      }
+
+      .cart-header {
+        margin-bottom: 30px;
+      }
+
+      .cart-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 10px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .cart-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 60px;
+        height: 4px;
+        background-color: var(--accent);
+      }
+
+      .cart-subtitle {
+        color: var(--gray);
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      /* Cart flex container for layout */
+      .cart-flex-container {
+        display: flex;
+        gap: 30px;
+      }
+
+      .cart-products {
+        flex: 3;
+        min-width: 0;
+      }
+
+      .cart-sidebar {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      /* Cart table styles */
+      .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .cart-table th {
+        background-color: var(--primary);
+        color: white;
+        padding: 15px;
+        text-align: right;
+        font-weight: 600;
+      }
+
+      .cart-table td {
+        padding: 15px;
+        border-bottom: 1px solid var(--light-gray);
+      }
+
+      .cart-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .cart-product {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .cart-product-image {
+        width: 80px;
+        height: 80px;
+        background-color: var(--light);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+      }
+
+      .cart-product-info h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .cart-product-info .dimensions {
+        font-size: 14px;
+        color: var(--gray);
+      }
+
+      .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .quantity-btn {
+        width: 30px;
+        height: 30px;
+        background-color: var(--light-gray);
+        border: none;
+        border-radius: 5px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .quantity-input {
+        width: 50px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid var(--light-gray);
+        border-radius: 5px;
+      }
+
+      .remove-item {
+        background: none;
+        border: none;
+        color: #dc3545;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      /* Cart summary sidebar */
+      .cart-summary {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .summary-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .summary-label {
+        font-weight: 600;
+      }
+
+      .summary-total {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .btn-checkout {
+        display: block;
+        width: 100%;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: all 0.3s;
+      }
+
+      .btn-checkout:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* Empty cart message */
+      .empty-cart {
+        text-align: center;
+        padding: 60px 0;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .empty-cart-icon {
+        font-size: 60px;
+        color: var(--light-gray);
+        margin-bottom: 20px;
+      }
+
+      .empty-cart-text {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--gray);
+        margin-bottom: 30px;
+      }
+
+      .back-to-shop {
+        display: inline-block;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 30px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
+        font-size: 16px;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .back-to-shop:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* Actions buttons */
+      .cart-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+
+      .continue-shopping {
+        background-color: var(--light-gray);
+        color: var(--dark);
+        border: none;
+        border-radius: 5px;
+        padding: 12px 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .continue-shopping:hover {
+        background-color: var(--gray);
+        color: white;
+      }
+
+      .update-cart {
+        background-color: var(--accent);
+        color: var(--dark);
+        border: none;
+        border-radius: 5px;
+        padding: 12px 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
+        transition: all 0.3s;
+      }
+
+      .update-cart:hover {
+        background-color: #d9a94a;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--primary-dark);
+        color: white;
+        padding: 50px 0 20px;
+        margin-top: 50px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -10px;
+        width: 40px;
+        height: 3px;
+        background-color: var(--accent);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      .contact-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        align-items: flex-start;
+      }
+
+      .contact-icon {
+        color: var(--accent);
+        font-size: 18px;
+      }
+
+      .about-text {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 14px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .cart-flex-container {
+          flex-direction: column;
+        }
+
+        .cart-sidebar {
+          width: 100%;
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .nav-right-section {
+          flex: 1;
+          justify-content: flex-end;
+        }
+
+        .cart-table thead {
+          display: none;
+        }
+
+        .cart-table,
+        .cart-table tbody,
+        .cart-table tr,
+        .cart-table td {
+          display: block;
+          width: 100%;
+        }
+
+        .cart-table tr {
+          margin-bottom: 20px;
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-table td {
+          text-align: right;
+          padding: 10px 15px;
+          position: relative;
+        }
+
+        .cart-table td::before {
+          content: attr(data-label);
+          font-weight: 600;
+          position: absolute;
+          right: 15px;
+          top: 10px;
+        }
+
+        .cart-table td:last-child {
+          border-bottom: none;
+          text-align: left;
+        }
+
+        .cart-product {
+          padding-right: 100px;
+          min-height: 80px;
+        }
+
+        .cart-product-image {
+          width: 60px;
+          height: 60px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header/Navbar -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <img
+            src="./images/Screenshot 2025-03-08 at 1.45.19 AM.png"
+            alt="Logo"
+            class="site-logo"
+          />
+
+          <div class="nav-menu">
+            <a href="index.html" class="nav-link">الرئيسية</a>
+            <a href="index.html#productsSection" class="nav-link">المنتجات</a>
+          </div>
+
+          <div class="nav-right-section">
+            <button class="nav-button">تسوق الآن</button>
+            <div class="cart-icon-container" id="cartIcon">
+              <svg
+                class="cart-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
+                  fill="#335E7C"
+                />
+              </svg>
+              <span class="cart-count" id="cartCount">0</span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- Cart Page Content -->
+    <section class="cart-page">
+      <div class="container">
+        <div class="cart-header">
+          <h1 class="cart-title">سلة التسوق</h1>
+          <p class="cart-subtitle">
+            تمت إضافة جميع المنتجات بنجاح إلى سلة التسوق.
+          </p>
+        </div>
+
+        <div id="cartContent">
+          <!-- Cart content will be inserted here by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>عن الشركة</h3>
+            <p class="about-text">
+              شركة جوريم للمواد الإنشائية هي شركة متخصصة في توفير أبواب الصيانة
+              عالية الجودة للمشاريع الإنشائية بأسعار منافسة وخدمة ممتازة.
+            </p>
+          </div>
+
+          <div class="footer-column">
+            <h3>روابط مهمة</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">الصفحة الرئيسية</a></li>
+              <li><a href="#">المنتجات</a></li>
+              <li><a href="#">عن الشركة</a></li>
+              <li><a href="#">سياسة الضمان</a></li>
+              <li><a href="#">الشروط والأحكام</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>المنتجات</h3>
+            <ul class="footer-links">
+              <li><a href="#">أبواب صيانة 20×20</a></li>
+              <li><a href="#">أبواب صيانة 30×30</a></li>
+              <li><a href="#">أبواب صيانة 60×60</a></li>
+              <li><a href="#">أبواب صيانة 120×60</a></li>
+              <li><a href="#">مقاسات خاصة</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>اتصل بنا</h3>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <span>60790250 / 97545669</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>الشويخ الصناعية، مجمع الحميضي لمواد البناء</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <span>info@joreem.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 جميع الحقوق محفوظة لشركة جوريم للمواد الإنشائية</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize cart count
+        updateCartCount();
+
+        // Render cart contents
+        renderCart();
+
+        // Update cart count function
+        function updateCartCount() {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cartCount");
+          let count = 0;
+
+          cart.forEach((item) => {
+            count += item.quantity;
+          });
+
+          cartCount.textContent = count;
+        }
+
+        // Render cart items function
+        function renderCart() {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartContent = document.getElementById("cartContent");
+
+          // Check if cart is empty
+          if (cart.length === 0) {
+            cartContent.innerHTML = `
+              <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <h2 class="empty-cart-text">سلة التسوق فارغة</h2>
+                <a href="index.html" class="back-to-shop">العودة للتسوق</a>
+              </div>
+            `;
+            return;
+          }
+
+          let totalItems = 0;
+          let totalPrice = 0;
+
+          // Calculate totals
+          cart.forEach((item) => {
+            totalItems += item.quantity;
+            totalPrice += item.price * item.quantity;
+          });
+
+          // Generate cart HTML
+          let cartHTML = `
+            <div class="cart-flex-container">
+              <div class="cart-products">
+                <table class="cart-table">
+                  <thead>
+                    <tr>
+                      <th>المنتج</th>
+                      <th>السعر</th>
+                      <th>الكمية</th>
+                      <th>الإجمالي</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          `;
+
+          // Add cart items
+          cart.forEach((item) => {
+            const itemTotal = item.price * item.quantity;
+
+            cartHTML += `
+              <tr data-id="${item.id}">
+                <td data-label="المنتج">
+                  <div class="cart-product">
+                    <div class="cart-product-image">
+                      <svg class="product-door" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+                        <!-- Ceiling pattern background -->
+                        <rect width="300" height="300" fill="#f5f5f5" opacity="0.5" />
+                        <pattern id="ceiling-pattern-cart-${
+                          item.id
+                        }" width="20" height="20" patternUnits="userSpaceOnUse">
+                          <rect width="20" height="20" fill="#f0f0f0" />
+                          <path d="M0 0L20 20M20 0L0 20" stroke="#e8e8e8" stroke-width="0.5" />
+                        </pattern>
+                        <rect width="300" height="300" fill="url(#ceiling-pattern-cart-${
+                          item.id
+                        })" opacity="0.5" />
+                        
+                        <!-- Access Panel Frame - Fixed part -->
+                        <rect x="75" y="75" width="150" height="150" rx="5" fill="#D6D6D6" />
+                        <rect x="75" y="75" width="150" height="150" rx="5" stroke="#335E7C" stroke-width="6" fill="none" />
+                        
+                        <!-- Panel Face - The door part (rotated to show it's open) -->
+                        <g transform="rotate(-20, 85, 150)">
+                          <rect x="85" y="85" width="130" height="130" rx="3" fill="#F8F9FA" />
+                          <rect x="85" y="85" width="130" height="130" rx="3" stroke="#335E7C" stroke-width="2" fill="none" />
+                          
+                          <!-- Hinges -->
+                          <rect x="90" y="105" width="5" height="25" rx="2" fill="#A0A0A0" />
+                          <rect x="90" y="170" width="5" height="25" rx="2" fill="#A0A0A0" />
+                          
+                          <!-- Panel Interior -->
+                          <text x="150" y="150" text-anchor="middle" font-family="Arial" font-size="12" fill="#335E7C">جوريم</text>
+                        </g>
+                        
+                        <!-- Handle -->
+                        <circle cx="195" cy="150" r="8" fill="#A0A0A0" />
+                      </svg>
+                    </div>
+                    <div class="cart-product-info">
+                      <h3>${item.name}</h3>
+                      <p class="dimensions">المقاس: ${item.size}</p>
+                    </div>
+                  </div>
+                </td>
+                <td data-label="السعر">${item.price} د.ك</td>
+                <td data-label="الكمية">
+                  <div class="quantity-control">
+                    <button class="quantity-btn minus" onclick="updateQuantity('${
+                      item.id
+                    }', -1)">-</button>
+                    <input type="text" class="quantity-input" value="${
+                      item.quantity
+                    }" readonly>
+                    <button class="quantity-btn plus" onclick="updateQuantity('${
+                      item.id
+                    }', 1)">+</button>
+                  </div>
+                </td>
+                <td data-label="الإجمالي">${itemTotal.toFixed(2)} د.ك</td>
+                <td>
+                  <button class="remove-item" onclick="removeItem('${
+                    item.id
+                  }')">×</button>
+                </td>
+              </tr>
+            `;
+          });
+
+          cartHTML += `
+                  </tbody>
+                </table>
+                
+                <div class="cart-actions">
+                  <a href="index.html" class="continue-shopping">متابعة التسوق</a>
+                  <button class="update-cart" onclick="updateCart()">تحديث السلة</button>
+                </div>
+              </div>
+              
+              <div class="cart-sidebar">
+                <div class="cart-summary">
+                  <h3 class="summary-title">ملخص الطلب</h3>
+                  
+                  <div class="summary-row">
+                    <span class="summary-label">عدد المنتجات:</span>
+                    <span id="totalItems">${totalItems}</span>
+                  </div>
+                  
+                  <div class="summary-row">
+                    <span class="summary-label">إجمالي الطلب:</span>
+                    <span id="totalPrice" class="summary-total">${totalPrice.toFixed(
+                      2
+                    )} د.ك</span>
+                  </div>
+                  
+                  <button class="btn-checkout">إتمام الشراء</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+          cartContent.innerHTML = cartHTML;
+        }
+
+        // Make functions available globally
+        window.updateQuantity = function (productId, change) {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const product = cart.find((item) => item.id === productId);
+
+          if (product) {
+            product.quantity += change;
+
+            if (product.quantity <= 0) {
+              removeItem(productId);
+              return;
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+          }
+        };
+
+        window.removeItem = function (productId) {
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart = cart.filter((item) => item.id !== productId);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+          renderCart();
+        };
+
+        window.updateCart = function () {
+          // Refresh the cart (this function could be extended to sync with server)
+          alert("تم تحديث السلة بنجاح!");
+          renderCart();
+        };
+      });
+    </script>
+  </body>
+</html>
